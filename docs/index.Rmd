@@ -41,7 +41,7 @@ To this effect, This repo contains all the R code for C2M2 Kathmandu portal, fro
 
 **Rethinking the XLSForm**
 
-Our survey forms are designed using the open source XForm standard. We realized that there was a need to re-evaluate how variable names are assigned in the XLSForm. The motivation was to reduce any manual effort post survey that is spent on data preprocessing. In this context, we have the following suggestions for anyone designing a survey using XLSForm:
+Our survey forms are designed using the open source [ODK XForm](https://xlsform.org/en/) standard. We realized that there was a need to re-evaluate how variable names are assigned in the XLSForm. The motivation was to reduce any manual effort post survey that is spent on data pre-processing. In this context, we have the following suggestions for anyone designing a survey using XLSForm:
 
 1. Design your own question coding scheme: The `name` column in the survey sheet, should have names that are a) easier to search and b) accurately represent what the column contains. If the column is a flag variable, clearly append a `_flg` suffix in the end. For our purposes we've come up with the following scheme:
 
