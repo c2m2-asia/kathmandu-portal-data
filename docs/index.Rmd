@@ -36,7 +36,6 @@ To this effect, This repo contains all the R code for C2M2 Kathmandu portal, fro
 *Use this space to write down observations.*
 
 
-
 #### March 30, 2021
 
 **Rethinking the XLSForm**
