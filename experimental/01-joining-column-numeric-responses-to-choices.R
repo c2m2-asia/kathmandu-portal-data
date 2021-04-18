@@ -9,7 +9,8 @@ source("C:/Users/arogy/projects/kathmandu-portal-data/utils/functions.R")
 source("C:/Users/arogy/projects/kathmandu-portal-data/utils/constants.R")
 
 # Parameters
-survey_data_path <- "C:/Users/arogy/projects/kathmandu-portal-data/raw/data/workers_data_20210415.xlsx"
+survey_data_path <- paste0(ROOT_URL, "raw/data/workers_data_20210418_v5.xlsx")
+
 
 
 
@@ -25,71 +26,29 @@ workers <- workers_data %>% filter(!is.na(m_gender))
 
 # Create categorical variables
 workers <- workers %>% mutate(gender_category = m_gender)
-workers <- workers %>% mutate(occupation_pre_covid_category = b_empl_occpatn_pre_covid)
 workers <- workers %>% mutate(age_category = m_age)
 workers <- workers %>% mutate(edu_levl_category = m_edu_levl)
 workers <- workers %>% mutate(exp_category = m_years_of_experience)
 
 # Separate dimensional Variables
-univariateStats <- PRCS.GetCountsAndProportionsSS(workers, DIMENSIONAL_VARS)
+univariateStatsForSS <- PRCS.GetCountsAndProportionsSS(workers, DIMENSIONAL_VARS)
 
-DF <- workers
-VARLIST <- c("b_empl_trsm_org.1",                             
-             "b_empl_trsm_org.2",                            
-             "b_empl_trsm_org.3",                             
-             "b_empl_trsm_org.4",                              
-             "b_empl_trsm_org.5",                               
-             "b_empl_trsm_org.6",                                
-             "b_empl_trsm_org.7",                                 
-             "b_empl_trsm_org_other")   
+IO.SaveCsv(univariateStatsForSS, "univariateStats", CSV_EXPORT_PATH)
+IO.SaveJson(univariateStatsForSS, "univariateStats", JSON_EXPORT_PATH)
 
-GROUP_BY_VAR <- ""
+colnames(workers)
 
-perc_suffix <- "_perc"
-total_suffix <- "_total"
-
-
-getValues  <- function(item) {
-  print(item)
-}
-
-perc_labels <- lapply(VARLIST, paste0, perc_suffix)
-total_labels <- lapply(VARLIST, paste0, total_suffix)
-variable_labels <- lapply
-
-
-
-for(v in VARLIST) {
-  DF[v] <- as.numeric(unlist(DF[v]))
-}
-
-msParent <- DF %>%
-  # group_by_at(GROUP_BY_VAR) %>%
-  summarise_at(
-    VARLIST,
-    funs(total = sum(., na.rm = T), perc = signif((sum(., na.rm = T) / n()), digits=6))
+multiselect_prefixes = c(
+  "o_impct_to_self_nxt_6_mnths", 
+  "o_rcvry_chllng_trsm_revival", 
+  "b_empl_occpatn_pre_covid","o_rcvry_chllng_trsm_revival",
+  "b_empl_trsm_org", "b_empl_trsm_major_districts","n_rcvry_preferred_incentives", "p_hlth_info_covid_src","p_hlth_hhs_training_src", "p_econ_hhd_items_post_covid", "p_econ_hhd_items_pre_covid","i_econ_covid_effects", "i_empl_covid_effects", "i_empl_jb_in_tourism_changed_to_add", "i_empl_jb_prsnt_status_prtl_switch_new_sctr"
   )
+univariateStatsForMS <- PRCS.GetCountsAndProportionsMSMultiQues(workers, multiselect_prefixes)
+allUnivariate <- rbind(univariateStatsForSS, univariateStatsForMS)#$#
 
-
-msParentPerc <- msParent %>%
-  select(ends_with("perc")) %>%
-  gather(
-    key = value,
-    value = perc_of_total
-  )
-msParentPerc$value <-
-  mapvalues(msParentPerc$value,
-            from = perc_labels,
-            to = variable_labels
-  )
-
-
-
-
-#$#
-
-
-
+IO.SaveCsv(allUnivariate, "univariateStats", CSV_EXPORT_PATH)
+# IO.SaveJson(univariateStatsForSS, "univariateStats", JSON_EXPORT_PATH)
 
 
 

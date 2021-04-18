@@ -1,5 +1,14 @@
+# PATHS
+ROOT_URL <- "C:/Users/arogy/projects/kathmandu-portal-data/"
+JSON_EXPORT_PATH <- paste0(ROOT_URL, "exports/json/")
+CSV_EXPORT_PATH <- paste0(ROOT_URL, "exports/csv/")
+
+
 # Separate flag variables
-DIMENSIONAL_VARS <- c("gender_category", "occupation_pre_covid_category", "age_category", "edu_levl_category", "exp_category")
+DIMENSIONAL_VARS <- c("gender_category",  "age_category", "edu_levl_category", "exp_category")
+
+
+
 
 FLAG_VARS <- c(
   "b_empl_trsm_major_districts",

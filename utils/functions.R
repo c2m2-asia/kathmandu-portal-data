@@ -3,6 +3,7 @@ library(readxl)
 library(RPostgreSQL)
 library(plyr)
 library(dplyr)
+library(jsonlite)
 
 DB.GetCon <- function () {
   return(dbConnect(dbDriver("PostgreSQL"), user="c2m2", password="1234",
@@ -11,13 +12,23 @@ DB.GetCon <- function () {
 
 # Functions
 IO.XlsSheetToDF <- function(sheet, xls_file) {
+  my_custom_name_repair <- function(nms) tolower(gsub("-", "/", nms))
   cl <- makeCluster(detectCores() - 1)
   df <- parLapplyLB(cl, sheet, function(sheet, xls_file) {
-    readxl::read_excel(xls_file, sheet = sheet)
+    readxl::read_excel(xls_file, sheet = sheet, .name_repair = my_custom_name_repair )
   }, xls_file)
   df <- as.data.frame(df)
   df <- df %>% mutate_if(is.character,as.factor)
   return(df)
+}
+
+IO.SaveCsv <- function(DF, NAME, PATH) {
+  write.csv(DF, file = paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".csv"), row.names = F)
+}
+
+IO.SaveJson <- function(DF, NAME, PATH) {
+  exportJSON <- toJSON(DF)
+  write(exportJSON, paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".json"))
 }
 
 # Convert column names to DB safe names
@@ -80,6 +91,106 @@ PRCS.CreateMultiselectTrueFlag <- function(table, oldVar, newName, value) {
   table[, newName] <- ifelse(table[,newName]==TRUE, as.integer(1), as.integer(0))
   return(table)
 }
+
+
+
+PRCS.GetCountsAndProportionsMSMultiQues <- function(DF, PREFIXES) {
+  DF["universe"] = "u"
+  countsAndProportionsTable <- data.frame( universe = character(),  value = character(), total = double(), variable = character(),perc_of_total = character())
+  
+  
+  
+  for (p in PREFIXES) {
+
+    names <- names(DF)[ grepl( p , names( DF ) )]
+    names <- names[ !grepl( "*rnk*" , names )]
+    print(p)
+    countsAndProportions <- PRCS.GetCountsAndProportionsMSOneQues(DF, names, CATEGORY_LABEL = toString(p), GROUP_BY_VAR = "universe")
+    
+    countsAndProportionsTable = rbind(countsAndProportions, countsAndProportionsTable)
+    
+    
+  }
+  
+  return(countsAndProportionsTable)
+  
+}
+
+
+PRCS.GetCountsAndProportionsMSOneQues <- function(DF, VARLIST, CATEGORY_LABEL, GROUP_BY_VAR) {
+  DF["universe"] <- "u"
+  perc_suffix <- "_perc"
+  total_suffix <- "_total"
+  
+  
+  getValues  <- function(item) {
+    if(length(strsplit(item, split="__")[[1]]) > 1) {
+      return (strsplit(item, split="__")[[1]][2])
+    }
+    return("Other")
+  }
+  
+  perc_labels <- lapply(VARLIST, paste0, perc_suffix)
+  total_labels <- lapply(VARLIST, paste0, total_suffix)
+  variable_labels <- lapply(VARLIST, getValues)
+  
+  # print(total_labels)
+  
+  
+  for(v in VARLIST) {
+    DF[v] <- ifelse(DF[v] == 1,  0, 1)
+    DF[v] <- as.numeric(unlist(DF[v]))
+  }
+  
+  
+  msParent <- DF %>%
+    group_by_at(GROUP_BY_VAR) %>%
+    summarise_at(
+      VARLIST,
+      funs(total = sum(., na.rm = T), perc = signif((sum(., na.rm = T) / n()), digits=6))
+    )
+  
+  
+  msParentPerc <- msParent %>%
+    select(
+      eval(GROUP_BY_VAR),
+      ends_with("perc")) %>%
+    gather(
+      key = value,
+      value = perc_of_total
+    )
+  msParentPerc$value <-
+    mapvalues(msParentPerc$value,
+              from = perc_labels,
+              to = variable_labels
+    )
+
+  
+  msParentTotal <-
+    msParent %>%
+    select(
+      eval(GROUP_BY_VAR),
+      ends_with("total")) %>%
+    gather(
+      key = value,
+      value = total, -eval(GROUP_BY_VAR)
+    )
+  
+  msParentTotal$value <- mapvalues(msParentTotal$value,
+                                   from = total_labels,
+                                   to = variable_labels
+  )
+  
+  msParentTotal$variable <- CATEGORY_LABEL
+  
+  
+  final <- inner_join(msParentTotal, msParentPerc)
+  final <- final %>% mutate(value = sapply(value, toString))
+  
+  dropCols <- c("universe")
+  final <- final[, !(names(final) %in% dropCols)]
+  return(final)
+}  
 
 
 PRCS.GetCountsAndProportionsSS <- function(DF, INPUTVARS) {
