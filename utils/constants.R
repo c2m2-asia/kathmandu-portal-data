@@ -7,7 +7,12 @@ CSV_EXPORT_PATH <- paste0(ROOT_URL, "exports/csv/")
 # Separate flag variables
 DIMENSIONAL_VARS <- c("gender_category",  "age_category", "edu_levl_category", "exp_category")
 
+ID_VARS <- c("X_index", "X_uuid", "X_submission_time" )
+META_VARS <- c("m_name", "m_gender",  "m_age", "m_edu_levl","m_years_of_experience", "m_phone") 
+ID_AND_META_VARS <- c(ID_VARS, META_VARS)  
 
+
+SS_VARS <- c("gender_category", "age_category", "i_mental_hlth_think")
 
 
 FLAG_VARS <- c(
