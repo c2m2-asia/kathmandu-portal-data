@@ -41,9 +41,9 @@ This section lists out all the things I did for data processing. This should aid
 
 
 ### Data related things to do at **Kobo Dashboard stage**
-1. Use appropriate download settings, here's what we use. Note that the "Group Seperator" -- though disabled -- ise set to "__" (two underscores.) This is important and must be followed.
+1. Use appropriate download settings, here's what we use. Note that the "Group Seperator" - though disabled - is set to "__" (two underscores.) This is important and must be followed.
 
-[](/misc/KoboExportSettings.png)
+![](/misc/KoboExportSettings.png)
 
 2. Not much else, Bhawak uploads the file and deploys the survey here.
 
