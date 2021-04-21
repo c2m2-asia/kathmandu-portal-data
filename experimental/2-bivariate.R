@@ -26,22 +26,18 @@ workers_data <- IO.XlsSheetToDF(excel_sheets(survey_data_path)[1], survey_data_p
 workers <- workers_data %>% filter(!is.na(m_gender))
 
 
-# Create categorical variables
-workers <- workers %>% mutate(gender_category = m_gender)
-workers <- workers %>% mutate(age_category = m_age)
-workers <- workers %>% mutate(edu_levl_category = m_edu_levl)
-workers <- workers %>% mutate(exp_category = m_years_of_experience)
+# # Create categorical variables
+# workers <- workers %>% mutate(gender_category = m_gender)
+# workers <- workers %>% mutate(age_category = m_age)
+# workers <- workers %>% mutate(edu_levl_category = m_edu_levl)
+# workers <- workers %>% mutate(exp_category = m_years_of_experience)
 
 
 
 
 # Data Wrangling
-MS_PREFIXES <- c(
-  "b_empl_occpatn_pre_covid",
-  "b_empl_trsm_org","i_econ_covid_effects", "i_empl_covid_effects"
-)
-
-SS_VARS <- c("gender_category", "age_category", "edu_levl_category", "exp_category")
+MS_PREFIXES <- MS_VARS
+SS_VARS <- SS_VARS
 
 
 bivariateStatsSsMs <- BI.MultiGetPropCountsSsMs(workers, MS_PREFIXES, SS_VARS)
@@ -50,7 +46,7 @@ bivariateStatsMsMs <- BI.MultiGetPropCountMsMs(workers, MS_PREFIXES)
 
 bivariateFinal <- rbind(bivariateStatsSsMs, bivariateStatsSsSs)
 bivariateFinal <- rbind(bivariateFinal, bivariateStatsMsMs)
-IO.SaveCsv(bivariateFinal, "bivariateStats", CSV_EXPORT_PATH)
+IO.SaveCsv(bivariateFinal, "bivariateStatsExhaustive", CSV_EXPORT_PATH)
 
 
 

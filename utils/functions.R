@@ -12,6 +12,8 @@ DB.GetCon <- function () {
                    host="localhost", dbname="c2m2"))
 } 
 
+
+
 # Functions
 IO.XlsSheetToDF <- function(sheet, xls_file) {
   my_custom_name_repair <- function(nms) tolower(gsub("-", "/", nms))
@@ -26,6 +28,10 @@ IO.XlsSheetToDF <- function(sheet, xls_file) {
 
 IO.SaveCsv <- function(DF, NAME, PATH) {
   write.csv(DF, file = paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".csv"), row.names = F)
+}
+
+MISC.GetFileName <- function(NAME, PATH) {
+  return(paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".csv"))
 }
 
 IO.SaveJson <- function(DF, NAME, PATH) {
@@ -96,6 +102,15 @@ PRCS.CreateMultiselectTrueFlag <- function(table, oldVar, newName, value) {
 
 
 
+PRCS.AppendLabels <- function(DF) {
+  path <- paste0(ROOT_URL, "misc/mapping.xlsx")
+  mapping_file <- IO.XlsSheetToDF(excel_sheets(path)[1], path)
+  mapping_file$value <- as.integer(as.character(mapping_file$value))
+  DF$value <- as.integer(as.character(DF$value))
+  return(left_join(DF, mapping_file))
+}
+
+
 UNI.GetCountsAndProportionsMSMultiQues <- function(DF, PREFIXES) {
   DF["universe"] = "u"
   countsAndProportionsTable <- data.frame( universe = character(),  value = character(), total = double(), variable = character(),perc_of_total = character())
@@ -106,6 +121,7 @@ UNI.GetCountsAndProportionsMSMultiQues <- function(DF, PREFIXES) {
 
     names <- names(DF)[ grepl( p , names( DF ) )]
     names <- names[ !grepl( "*rnk*" , names )]
+    names <- names[ !grepl( "*_other" , names )]
     print(p)
     countsAndProportions <- UNI.GetCountsAndProportionsMSOneQues(DF, names, CATEGORY_LABEL = toString(p), GROUP_BY_VAR = "universe")
     
@@ -122,7 +138,8 @@ UNI.GetCountsAndProportionsMSMultiQues <- function(DF, PREFIXES) {
 PRCS.GetMultiSelectNamesFromPrefix <- function(DF, PREFIX) {
   names <- names(DF)[ grepl( PREFIX , names( DF ) )]
   names <- names[ !grepl( "*rnk*" , names )]
-  # DF[]
+  names <- names[ !grepl( "*_other" , names )]
+    # DF[]
   return(names)
 }
 
