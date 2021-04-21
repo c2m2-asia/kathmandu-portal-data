@@ -53,14 +53,16 @@ Nothing. This is the idea, to not play with the data file. Everything must be do
 
 ### Data related things to do at **R Scripts** stage:
 
-1. Generate tables for API use:
+1. :heavy_check_mark: Generate tables for API use:
     a. univariate stats table
     b. Bivartiate stats table
     c. ...other?
-2. Finalize variable names for API use. The `keys`, `values`, `labels`, if set here, can simplify integration to Django.
-3. Map variable names to respective labels in English and Nepali. 
+2. :heavy_check_mark: Finalize variable names for API use. The `keys`, `values`, `labels`, if set here, can simplify integration to Django.
+3. Isolate single-select, multiselect variables.
+3. Think of what to do for branced variables
+3. :heavy_check_mark: Map variable names to respective labels in English and Nepali. 
 4. More:
-    - write reusable, general functions
+    -  :heavy_check_mark: write reusable, general functions
     - Simplify code
     - Use comments
     - Name properly
