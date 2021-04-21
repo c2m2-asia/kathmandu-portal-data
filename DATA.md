@@ -69,3 +69,8 @@ Nothing. This is the idea, to not play with the data file. Everything must be do
     - name properly
     - etc.
 
+## Where are the files/content?
+
+1. XLSForm can be downloaded from the Kobo dashboard. 
+2. Raw Survey Data XLS can also be downloaded from the Kobo dashboard. Be sure to use the above shown settings.
+3. Workers survey form: [https://kobo.humanitarianresponse.info/#/forms/aLY6jiGgq3cFqvT5uevaNj](https://kobo.humanitarianresponse.info/#/forms/aLY6jiGgq3cFqvT5uevaNj)
