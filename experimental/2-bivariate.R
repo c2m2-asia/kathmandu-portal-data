@@ -6,9 +6,11 @@ library(tidyr)
 library(MRCV)
 library(reshape2)
 library(stringr)
+
+
 # Imports
-source("C:/Users/arogy/projects/kathmandu-portal-data/utils/functions.R")
-source("C:/Users/arogy/projects/kathmandu-portal-data/utils/constants.R")
+source("~/projects/c2m2/kathmandu-survey/utils/functions.R")
+source("~/projects/c2m2/kathmandu-survey/utils/constants.R")
 
 # Parameters
 survey_data_path <- paste0(ROOT_URL, "raw/data/workers_data_20210420.xlsx")
@@ -48,6 +50,20 @@ bivariateFinal <- rbind(bivariateStatsSsMs, bivariateStatsSsSs)
 bivariateFinal <- rbind(bivariateFinal, bivariateStatsMsMs)
 IO.SaveCsv(bivariateFinal, "bivariateStatsExhaustive", CSV_EXPORT_PATH)
 
+
+mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en)
+bivariate_w_label <- left_join(bivariateFinal, mapping, by = c("x_variable"="variable", "x_value"="value"))
+names(bivariate_w_label)[7:8] <- c("x_label_ne", "x_label_en")
+
+bivariate_w_label <- left_join(bivariate_w_label, mapping, by = c("y_variable"="variable", "y_value"="value"))
+names(bivariate_w_label)[9:10] <- c("y_label_ne", "y_label_en")
+bivariate_w_label <- bivariate_w_label %>% select(x_variable, x_value, x_label_ne, x_label_en, y_variable, y_value, y_label_ne, y_label_en, total, perc )
+names(bivariate_w_label)[10]<-"perc_of_total"
+
+
+
+# Write to DB
+DB.WriteToDb(DB.GetCon(), df = bivariateFinal, "workers_bivariate_stats")
 
 
 

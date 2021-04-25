@@ -26,17 +26,27 @@ IO.XlsSheetToDF <- function(sheet, xls_file) {
   return(df)
 }
 
-IO.SaveCsv <- function(DF, NAME, PATH) {
-  write.csv(DF, file = paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".csv"), row.names = F)
+IO.SaveCsv <- function(DF, NAME, PATH, dates=T) {
+  if(dates == T) {
+    write.csv(DF, file = paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".csv"), row.names = F)
+  } else {
+    write.csv(DF, file = paste0(PATH, NAME, ".csv"), row.names = F)
+  }
+  
 }
 
 MISC.GetFileName <- function(NAME, PATH) {
   return(paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".csv"))
 }
 
-IO.SaveJson <- function(DF, NAME, PATH) {
+IO.SaveJson <- function(DF, NAME, PATH, dates=T) {
   exportJSON <- toJSON(DF)
-  write(exportJSON, paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".json"))
+  if(dates == T) {
+    write(exportJSON, paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".json"))
+    
+  } else {
+    write(exportJSON, paste0(PATH, NAME, ".json"))
+  }
 }
 
 # Convert column names to DB safe names
@@ -490,6 +500,8 @@ BI.MultiGetPropCountMsMs <- function(DF, MS_PREFIXES) {
   
   return(countsAndProportionsTable)
 }
+
+
 
 
 # Write DF to PGSQL table

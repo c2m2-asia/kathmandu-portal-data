@@ -1,0 +1,347 @@
+"variable","value","total","perc_of_total","choice_code","label_en","label_ne","name_in_xlsforrm"
+"b_empl_frml_agrmnt_status_pre_covid","1",20,"0.1960784",1,NA,"छ/थियो","b_empl_frml_agrmnt_status_pre_covid"
+"b_empl_frml_agrmnt_status_pre_covid","2",82,"0.8039216",2,NA,"छैन/थिएन","b_empl_frml_agrmnt_status_pre_covid"
+"b_empl_had_pan_pre_covid","1",83,"0.8137255",3,NA,"थियो","b_empl_had_pan_pre_covid"
+"b_empl_had_pan_pre_covid","2",19,"0.1862745",4,NA,"थिएन","b_empl_had_pan_pre_covid"
+"b_empl_wrk_sesonal_period","1",10,"0.1123596",5,NA,"१-३ महिना",NA
+"b_empl_wrk_sesonal_period","2",71,"0.7977528",6,NA,"४-६ महिना",NA
+"b_empl_wrk_sesonal_period","3",8,"0.0898876",7,NA,"७-९ महिना",NA
+"i_econ_incm_chng_self","1",88,"0.8627451",9,NA,"कुल आय लगभग शुन्य (न्यून) भयो",NA
+"i_econ_incm_chng_self","2",2,"0.0196078",10,NA,"कुल आय एक-चौथाई (२५%)ले घट्यो",NA
+"i_econ_incm_chng_self","3",5,"0.0490196",11,NA,"कुल आय आधि (५०%)ले घट्यो",NA
+"i_econ_incm_chng_self","4",6,"0.0588235",12,NA,"कुल आय तीन-चौथाई (७५%)ले घट्यो",NA
+"i_econ_incm_chng_self","5",1,"0.0098039",13,NA,"कुल आय लगभग उस्तै रह्यो",NA
+"i_empl_emplyr_in_tourism_change_post_covid","1",5,"0.3333333",15,NA,"पर्यो",NA
+"i_empl_emplyr_in_tourism_change_post_covid","2",10,"0.6666667",16,NA,"परेन",NA
+"i_empl_emplyr_in_tourism_change_post_covid_add","1",5,"0.8333333",17,NA,"पर्यो",NA
+"i_empl_emplyr_in_tourism_change_post_covid_add","2",1,"0.1666667",18,NA,"परेन",NA
+"i_empl_emplyr_in_tourism_prsnt_frml_agrmnt_status_add","2",6,"1",20,NA,"छैन",NA
+"i_empl_in_tourism_paid_tax_post_covid_add","1",3,"0.5",21,NA,"पर्छ",NA
+"i_empl_in_tourism_paid_tax_post_covid_add","2",3,"0.5",22,NA,"पर्दैन",NA
+"i_empl_jb_prsnt_status","1",15,"0.1470588",23,NA,"छु, म पूर्ण रूपले पर्यटन क्षेत्रमा मात्रै काम गर्दै छु",NA
+"i_empl_jb_prsnt_status","2",6,"0.0588235",24,NA,"छु, तर म पर्यटन लगायत अन्य क्षेत्रमा पनि काम गर्दै छु 
+(हाल पर्यटन क्षेत्रको काम कुर्दै गरेका तर अन्य क्षेत्रको काम गर्दै गरेकालाई पनि)",NA
+"i_empl_jb_prsnt_status","3",80,"0.7843137",25,NA,"अहिले पर्यटन क्षेत्रमा मैले गर्ने प्रकृतिको काम नभएकाले / नपाएकाले काम कुरेर बसिरहेको छु
+ (अहिले कुनै किसिमको रोजगारी नगरी बसेको)",NA
+"i_empl_jb_prsnt_status","4",1,"0.0098039",26,NA,"छैन, मैले पर्यटन क्षेत्र छाडिसकेको छु",NA
+"i_empl_lst_date_full_salary","1",84,"0.8235294",27,NA,"कोभिड-१९ लकडाउन भन्दा पहिले (चैत्र २०७६ भन्दा पहिले) (Before March 2020)",NA
+"i_empl_lst_date_full_salary","2",6,"0.0588235",28,NA,"बैशाख देखि असोज २०७७ को बीचमा (Between March and September 2020)",NA
+"i_empl_lst_date_full_salary","3",3,"0.0294118",29,NA,"कार्तिक देखि पौष २०७७ को बीचमा (Between October and December 2020)",NA
+"i_empl_lst_date_full_salary","4",7,"0.0686275",30,NA,"माघ २०७७ पछि (After December 2021)",NA
+"i_empl_lst_date_full_salary","5",2,"0.0196078",31,NA,"मेरो पूर्ण तलब (आम्दानी)मा कोभिड-१९ले कुनै असर नगरेको",NA
+"i_hlth_covid_infectn_family","1",8,"0.0784314",32,NA,"छ/थियो",NA
+"i_hlth_covid_infectn_family","2",94,"0.9215686",33,NA,"छैन/थिएन",NA
+"i_hlth_covid_infectn_self","1",6,"0.0588235",34,NA,"छ/थियो",NA
+"i_hlth_covid_infectn_self","2",96,"0.9411765",35,NA,"छैन/थिएन",NA
+"i_hlth_covid_infectn_self_time","2",4,"0.6666667",37,NA,"कार्तिक देखि पौष २०७७ को बीचमा (Between October and December 2020)",NA
+"i_hlth_covid_infectn_self_time","3",2,"0.3333333",38,NA,"माघ २०७७ पछि (After December 2021)",NA
+"i_lvlhd_domicile_chng_self","1",19,"0.1862745",39,NA,"पर्यो, तर म फेरि त्यहि ठाउँमा आई सकेको छु",NA
+"i_lvlhd_domicile_chng_self","2",33,"0.3235294",40,NA,"पर्यो, म त्यहि गाउँ/सहरको अर्को ठाउँमा सरेको छु",NA
+"i_lvlhd_domicile_chng_self","3",6,"0.0588235",41,NA,"पर्यो, म अर्कै गाउँ/सहरमा सरेको छु",NA
+"i_lvlhd_domicile_chng_self","4",44,"0.4313725",42,NA,"परेन",NA
+"i_lvlhd_domicile_chng_self_temp_tm_prd","1",2,"0.1052632",43,NA,"१ महिना भन्दा कम",NA
+"i_lvlhd_domicile_chng_self_temp_tm_prd","2",7,"0.3684211",44,NA,"२-६ महिना सम्म",NA
+"i_lvlhd_domicile_chng_self_temp_tm_prd","3",10,"0.5263158",45,NA,"६ महिना भन्दा बढी",NA
+"i_mental_hlth_blame","1",44,"0.4313725",46,NA,"छैन",NA
+"i_mental_hlth_blame","2",58,"0.5686275",47,NA,"छ",NA
+"i_mental_hlth_detached","1",27,"0.2647059",48,NA,"छैन",NA
+"i_mental_hlth_detached","2",75,"0.7352941",49,NA,"छ",NA
+"i_mental_hlth_fml","1",42,"0.4117647",50,NA,"छैन",NA
+"i_mental_hlth_fml","2",60,"0.5882353",51,NA,"छ",NA
+"i_mental_hlth_neg_think","1",43,"0.4215686",52,NA,"छैन",NA
+"i_mental_hlth_neg_think","2",59,"0.5784314",53,NA,"छ",NA
+"i_mental_hlth_overconcerned","1",56,"0.5490196",54,NA,"छैन",NA
+"i_mental_hlth_overconcerned","2",46,"0.4509804",55,NA,"छ",NA
+"i_mental_hlth_social","1",18,"0.1764706",56,NA,"छैन",NA
+"i_mental_hlth_social","2",84,"0.8235294",57,NA,"छ",NA
+"i_mental_hlth_therapy","1",82,"0.8039216",58,NA,"छैन",NA
+"i_mental_hlth_therapy","2",20,"0.1960784",59,NA,"छ",NA
+"i_mental_hlth_think","1",32,"0.3137255",60,NA,"छैन",NA
+"i_mental_hlth_think","2",70,"0.6862745",61,NA,"छ",NA
+"m_age","1",3,"0.0294118",62,NA,"०-२० बर्ष",NA
+"m_age","2",84,"0.8235294",63,NA,"२१-४० बर्ष",NA
+"m_age","3",15,"0.1470588",64,NA,"४१-६० वर्ष",NA
+"m_dist_perm","1",1,"0.0098039",66,"Achham","अछाम",NA
+"m_dist_perm","10",1,"0.0098039",75,"Bhaktapur","भक्तपुर",NA
+"m_dist_perm","11",1,"0.0098039",76,"Bhojpur","भोजपुर",NA
+"m_dist_perm","12",3,"0.0294118",77,"Chitawan","चितवन",NA
+"m_dist_perm","15",1,"0.0098039",80,"Dang","दाङ",NA
+"m_dist_perm","17",1,"0.0098039",82,"Dhading","धादिङ",NA
+"m_dist_perm","19",1,"0.0098039",84,"Dhanusa","धनुषा",NA
+"m_dist_perm","20",3,"0.0294118",85,"Dolakha","दोलखा",NA
+"m_dist_perm","23",8,"0.0784314",88,"Gorkha","गोरखा",NA
+"m_dist_perm","26",1,"0.0098039",91,"Ilam","इलाम",NA
+"m_dist_perm","28",1,"0.0098039",93,"Jhapa","झापा",NA
+"m_dist_perm","34",1,"0.0098039",99,"Kaski","कास्की",NA
+"m_dist_perm","35",5,"0.0490196",100,"Kathmandu","काठमाडौँ",NA
+"m_dist_perm","37",4,"0.0392157",102,"Khotang","खोटाँग",NA
+"m_dist_perm","38",2,"0.0196078",103,"Lalitpur","ललितपुर",NA
+"m_dist_perm","39",1,"0.0098039",104,"Lamjung","लमजुङ",NA
+"m_dist_perm","41",1,"0.0098039",106,"Makwanpur","मकवानपुर",NA
+"m_dist_perm","49",3,"0.0294118",114,"Nuwakot","नुवाकोट",NA
+"m_dist_perm","50",1,"0.0098039",115,"Okhaldhunga","ओखलढुंगा",NA
+"m_dist_perm","56",3,"0.0294118",121,"Ramechhap","रामेछाप",NA
+"m_dist_perm","57",8,"0.0784314",122,"Rasuwa","रसुवा",NA
+"m_dist_perm","60",1,"0.0098039",125,"Rukum East","पूर्वी रूकुम",NA
+"m_dist_perm","64",8,"0.0784314",129,"Sankhuwasabha","संखुवासभा",NA
+"m_dist_perm","66",2,"0.0196078",131,"Sarlahi","सर्लाही",NA
+"m_dist_perm","67",2,"0.0196078",132,"Sindhuli","सिन्धुली",NA
+"m_dist_perm","70",34,"0.3333333",135,"Solukhumbu","सोलुखुम्बू",NA
+"m_dist_perm","71",1,"0.0098039",136,"Sunsari","सुनसरी",NA
+"m_dist_perm","73",1,"0.0098039",138,"Syangja","स्याङग्जा",NA
+"m_dist_perm","74",1,"0.0098039",139,"Tanahu","तनहुँ",NA
+"m_dist_perm","77",1,"0.0098039",142,"Udayapur","उदयपुर",NA
+"m_dist_temp","10",3,"0.0294118",152,"Bhaktapur","भक्तपुर",NA
+"m_dist_temp","12",3,"0.0294118",154,"Chitawan","चितवन",NA
+"m_dist_temp","20",2,"0.0196078",162,"Dolakha","दोलखा",NA
+"m_dist_temp","23",1,"0.0098039",165,"Gorkha","गोरखा",NA
+"m_dist_temp","34",2,"0.0196078",176,"Kaski","कास्की",NA
+"m_dist_temp","35",80,"0.7843137",177,"Kathmandu","काठमाडौँ",NA
+"m_dist_temp","38",3,"0.0294118",180,"Lalitpur","ललितपुर",NA
+"m_dist_temp","57",1,"0.0098039",199,"Rasuwa","रसुवा",NA
+"m_dist_temp","64",1,"0.0098039",206,"Sankhuwasabha","संखुवासभा",NA
+"m_dist_temp","70",6,"0.0588235",212,"Solukhumbu","सोलुखुम्बू",NA
+"m_edu_levl","1",1,"0.0098039",220,NA,"निरक्षर",NA
+"m_edu_levl","2",14,"0.1372549",221,NA,"अक्षर चिन्ने",NA
+"m_edu_levl","3",30,"0.2941176",222,NA,"एस्.एल.सी.",NA
+"m_edu_levl","4",33,"0.3235294",223,NA,"+२' वा सो सरह",NA
+"m_edu_levl","5",18,"0.1764706",224,NA,"स्नातक",NA
+"m_edu_levl","6",6,"0.0588235",225,NA,"स्नातकोत्तर वा माथि",NA
+"m_gender","1",93,"0.9117647",226,NA,"पुरुष",NA
+"m_gender","2",9,"0.0882353",227,NA,"महिला",NA
+"m_mun_perm","1001",1,"0.125",229,NA,"सुर्यविनायक नगरपालिका",NA
+"m_mun_perm","3501",5,"0.625",230,NA,"शंखरापुर नगरपालिका",NA
+"m_mun_perm","3801",2,"0.25",231,NA,"महाङ्काल गाउँपालिका",NA
+"m_mun_temp","1001",3,"0.0348837",232,NA,"सुर्यविनायक नगरपालिका",NA
+"m_mun_temp","3501",80,"0.9302326",233,NA,"शंखरापुर नगरपालिका",NA
+"m_mun_temp","3801",3,"0.0348837",234,NA,"महाङ्काल गाउँपालिका",NA
+"m_years_of_experience","1",6,"0.0588235",235,NA,"०-२ वर्ष",NA
+"m_years_of_experience","2",11,"0.1078431",236,NA,"३-५ वर्ष",NA
+"m_years_of_experience","3",49,"0.4803922",237,NA,"६-१० वर्ष",NA
+"m_years_of_experience","4",17,"0.1666667",238,NA,"११-१५ बर्ष",NA
+"m_years_of_experience","5",19,"0.1862745",239,NA,"१५ वर्ष भन्दा बढी",NA
+"o_econ_impact_fml_income_chng_21_v_19","1",10,"0.0980392",240,NA,"कुल आय लगभग उत्तिक्कै हुन्छ होला",NA
+"o_econ_impact_fml_income_chng_21_v_19","2",4,"0.0392157",241,NA,"कुल आय एक-चौथाई (२५%)ले घट्छ होला",NA
+"o_econ_impact_fml_income_chng_21_v_19","3",5,"0.0490196",242,NA,"कुल आय आधि (५०%)ले घट्छ होला",NA
+"o_econ_impact_fml_income_chng_21_v_19","4",13,"0.127451",243,NA,"कुल आय तीन-चौथाई (७५%)ले घट्छ होला",NA
+"o_econ_impact_fml_income_chng_21_v_19","5",69,"0.6764706",244,NA,"कुल आय लगभग शुन्य (०%) हुन्छ होला",NA
+"o_econ_impact_fml_income_chng_21_v_19","6",1,"0.0098039",245,NA,"कुल आय बढ्छ होला",NA
+"o_econ_impact_how_long_months","1",2,"0.0196078",246,NA,"६ महिना भन्दा कम",NA
+"o_econ_impact_how_long_months","2",26,"0.254902",247,NA,"६ देखि १२ महिना सम्म",NA
+"o_econ_impact_how_long_months","3",43,"0.4215686",248,NA,"१३ देखि २४ महिना सम्म",NA
+"o_econ_impact_how_long_months","4",31,"0.3039216",249,NA,"२४ महिना भन्दा बढी",NA
+"o_empl_status_to_nrml_how_long_months","1",3,"0.0294118",250,NA,"तुरुन्तै",NA
+"o_empl_status_to_nrml_how_long_months","2",4,"0.0392157",251,NA,"सुचारु भएको ३ महिना भित्र",NA
+"o_empl_status_to_nrml_how_long_months","3",21,"0.2058824",252,NA,"सुचारु भएको १२ महिना भित्र",NA
+"o_empl_status_to_nrml_how_long_months","4",1,"0.0098039",253,NA,"म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु",NA
+"o_empl_status_to_nrml_how_long_months","5",73,"0.7156863",254,NA,"केहि भन्न सकिंदैन",NA
+"p_econ_outstndng_loans_self","1",2,"0.0196078",255,NA,"छैन",NA
+"p_econ_outstndng_loans_self","2",100,"0.9803922",256,NA,"छ",NA
+"p_econ_self_savings_chng_today_v_19","1",5,"0.0490196",257,NA,"लगभग उत्तिकै बाँकी छ",NA
+"p_econ_self_savings_chng_today_v_19","2",6,"0.0588235",258,NA,"तीन-चौथाई (७५%) बाँकी छ",NA
+"p_econ_self_savings_chng_today_v_19","3",1,"0.0098039",259,NA,"आधि (५०%) बाँकी छ",NA
+"p_econ_self_savings_chng_today_v_19","4",74,"0.7254902",260,NA,"एक-चौथाई (२५%) बाँकी छ",NA
+"p_econ_self_savings_chng_today_v_19","5",16,"0.1568627",261,NA,"लगभग शुन्य बाँकी छ",NA
+"p_hlth_received_hhs_training_self","1",99,"0.9705882",263,NA,"छैन",NA
+"p_hlth_received_hhs_training_self","2",3,"0.0294118",264,NA,"छ",NA
+"p_hlth_vaccinated_self","1",51,"0.5",265,NA,"छैन",NA
+"p_hlth_vaccinated_self","2",51,"0.5",266,NA,"छ",NA
+"p_lvlhd_num_depndnt_fml_membrs_post_covid","1",9,"0.0882353",267,NA,"१ जना (म मात्रै)",NA
+"p_lvlhd_num_depndnt_fml_membrs_post_covid","2",8,"0.0784314",268,NA,"२ जना",NA
+"p_lvlhd_num_depndnt_fml_membrs_post_covid","3",60,"0.5882353",269,NA,"३-५ जना",NA
+"p_lvlhd_num_depndnt_fml_membrs_post_covid","4",25,"0.245098",270,NA,"५ जना भन्दा बढी",NA
+"p_lvlhd_num_depndnt_fml_membrs_pre_covid","1",4,"0.0392157",271,NA,"१ जना (म मात्रै)",NA
+"p_lvlhd_num_depndnt_fml_membrs_pre_covid","2",8,"0.0784314",272,NA,"२ जना",NA
+"p_lvlhd_num_depndnt_fml_membrs_pre_covid","3",63,"0.6176471",273,NA,"३-५ जना",NA
+"p_lvlhd_num_depndnt_fml_membrs_pre_covid","4",27,"0.2647059",274,NA,"५ जना भन्दा बढी",NA
+"p_lvlhd_num_depndnt_need_fml_membrs_post_covid","1",75,"0.7352941",275,NA,"शुन्य (०) जना",NA
+"p_lvlhd_num_depndnt_need_fml_membrs_post_covid","2",12,"0.1176471",276,NA,"१-२ जना",NA
+"p_lvlhd_num_depndnt_need_fml_membrs_post_covid","3",11,"0.1078431",277,NA,"३-५ जना",NA
+"p_lvlhd_num_depndnt_need_fml_membrs_post_covid","4",4,"0.0392157",278,NA,"५ जना भन्दा बढी",NA
+"p_hlth_info_covid_src","1",71,"0.696078",279,NA,"परिवार जन तथा छिमेकी",NA
+"p_hlth_info_covid_src","2",12,"0.117647",280,NA,"सामाजिक संजाल",NA
+"p_hlth_info_covid_src","3",84,"0.823529",281,NA,"रेडियो",NA
+"p_hlth_info_covid_src","4",33,"0.323529",282,NA,"टेलिभिजन",NA
+"p_hlth_info_covid_src","5",52,"0.509804",283,NA,"पत्र-पत्रिका",NA
+"p_hlth_info_covid_src","6",92,"0.901961",284,NA,"नजिकैको स्वास्थ्य सेवा",NA
+"p_hlth_info_covid_src","7",102,"1",285,NA,"अन्य",NA
+"p_hlth_hhs_training_src","1",3,"0.0294118",287,NA,"सरकारी निकायबाट",NA
+"p_hlth_hhs_training_src","2",3,"0.0294118",288,NA,"गैर-सरकारी संघ-संस्थाबाट",NA
+"p_hlth_hhs_training_src","3",2,"0.0196078",289,NA,"रोजगारदाताबाट",NA
+"p_hlth_hhs_training_src","4",1,"0.00980392",290,NA,"पर्यटकीय संघ-संस्थाबाट (जस्तै होटेल व्यवसाय महासंघ, TAAN, HAN, UNITRAV, JOTTUF आदि)",NA
+"p_hlth_hhs_training_src","5",3,"0.0294118",291,NA,"अन्य",NA
+"p_econ_hhd_items_pre_covid","1",36,"0.352941",293,NA,"जग्गा / जमिन",NA
+"p_econ_hhd_items_pre_covid","2",34,"0.333333",294,NA,"टेलिभिजन",NA
+"p_econ_hhd_items_pre_covid","3",76,"0.745098",295,NA,"केबुल टेलिभिजन",NA
+"p_econ_hhd_items_pre_covid","4",71,"0.696078",296,NA,"कम्प्युटर / ल्याप्टप",NA
+"p_econ_hhd_items_pre_covid","5",60,"0.588235",297,NA,"इन्टरनेट",NA
+"p_econ_hhd_items_pre_covid","6",89,"0.872549",298,NA,"टेलिफोन",NA
+"p_econ_hhd_items_pre_covid","7",10,"0.0980392",299,NA,"मोबाइल फोन",NA
+"p_econ_hhd_items_pre_covid","8",80,"0.784314",300,NA,"रेफ्रीजरेटर",NA
+"p_econ_hhd_items_pre_covid","9",66,"0.647059",301,NA,"मोटरसाइकल",NA
+"p_econ_hhd_items_pre_covid","10",102,"1",302,NA,"पारिवारिक प्रयोजनको चार पांग्रे मोटर/सवारी साधन",NA
+"p_econ_hhd_items_pre_covid","11",99,"0.970588",303,NA,"व्यावसायिक प्रयोजनको चार पांग्रे मोटर/सवारी साधन",NA
+"p_econ_hhd_items_pre_covid","12",101,"0.990196",304,NA,"माथिका कुनै पनि सुविधाहरू नभएको",NA
+"p_econ_hhd_items_post_covid","1",41,"0.401961",305,NA,"जग्गा / जमिन",NA
+"p_econ_hhd_items_post_covid","2",50,"0.490196",306,NA,"टेलिभिजन",NA
+"p_econ_hhd_items_post_covid","3",78,"0.764706",307,NA,"केबुल टेलिभिजन",NA
+"p_econ_hhd_items_post_covid","4",83,"0.813725",308,NA,"कम्प्युटर / ल्याप्टप",NA
+"p_econ_hhd_items_post_covid","5",73,"0.715686",309,NA,"इन्टरनेट",NA
+"p_econ_hhd_items_post_covid","6",95,"0.931373",310,NA,"टेलिफोन",NA
+"p_econ_hhd_items_post_covid","7",12,"0.117647",311,NA,"मोबाइल फोन",NA
+"p_econ_hhd_items_post_covid","8",88,"0.862745",312,NA,"रेफ्रीजरेटर",NA
+"p_econ_hhd_items_post_covid","9",77,"0.754902",313,NA,"मोटरसाइकल",NA
+"p_econ_hhd_items_post_covid","10",101,"0.990196",314,NA,"पारिवारिक प्रयोजनको चार पांग्रे मोटर/सवारी साधन",NA
+"p_econ_hhd_items_post_covid","11",102,"1",315,NA,"व्यावसायिक प्रयोजनको चार पांग्रे मोटर/सवारी साधन",NA
+"p_econ_hhd_items_post_covid","12",97,"0.95098",316,NA,"माथिका कुनै पनि सुविधाहरू नभएको",NA
+"o_rcvry_chllng_trsm_revival","1",46,"0.45098",317,NA,"कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने",NA
+"o_rcvry_chllng_trsm_revival","2",13,"0.127451",318,NA,"स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने",NA
+"o_rcvry_chllng_trsm_revival","3",34,"0.333333",319,NA,"आर्थिक चुनौतीहरू",NA
+"o_rcvry_chllng_trsm_revival","4",33,"0.323529",320,NA,"पर्यटकको संख्यामा आउने कमि",NA
+"o_rcvry_chllng_trsm_revival","5",86,"0.843137",321,NA,"स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने",NA
+"o_rcvry_chllng_trsm_revival","6",98,"0.960784",322,NA,"अन्य",NA
+"o_rcvry_chllng_trsm_revival","7",101,"0.990196",323,NA,"म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्",NA
+"o_impct_to_self_nxt_6_mnths","1",70,"0.686275",325,NA,"घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)",NA
+"o_impct_to_self_nxt_6_mnths","2",25,"0.245098",326,NA,"घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)",NA
+"o_impct_to_self_nxt_6_mnths","3",41,"0.401961",327,NA,"स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न",NA
+"o_impct_to_self_nxt_6_mnths","4",50,"0.490196",328,NA,"शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न",NA
+"o_impct_to_self_nxt_6_mnths","5",34,"0.333333",329,NA,"खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न",NA
+"o_impct_to_self_nxt_6_mnths","6",43,"0.421569",330,NA,"ऋण तथा सापटी लिन सकिन्न",NA
+"o_impct_to_self_nxt_6_mnths","7",28,"0.27451",331,NA,"ऋण तथा सापटी तिर्न सकिन्न",NA
+"o_impct_to_self_nxt_6_mnths","8",101,"0.990196",332,NA,"अन्य",NA
+"o_impct_to_self_nxt_6_mnths","9",101,"0.990196",333,NA,"मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला",NA
+"n_rcvry_preferred_incentives","1",75,"0.735294",335,NA,"स्वास्थ्य सम्बन्धि तालिम वा पुन:प्रशिक्षण",NA
+"n_rcvry_preferred_incentives","2",47,"0.460784",336,NA,"रोजगारीमूलक तालिम वा पुन:प्रशिक्षण",NA
+"n_rcvry_preferred_incentives","3",68,"0.666667",337,NA,"नयाँ सीप सिक्ने अवसर",NA
+"n_rcvry_preferred_incentives","4",67,"0.656863",338,NA,"नयाँ रोजगारीको अवसर",NA
+"n_rcvry_preferred_incentives","5",27,"0.264706",339,NA,"सहुलियत दरमा ऋण",NA
+"n_rcvry_preferred_incentives","6",60,"0.588235",340,NA,"ब्याज दरमा बिशेष छूट",NA
+"n_rcvry_preferred_incentives","7",82,"0.803922",341,NA,"करमा छूट",NA
+"n_rcvry_preferred_incentives","8",85,"0.833333",342,NA,"बैंक आदि लगायतको किस्ता तिर्ने अवधि बढाउने वा केहि समयका लागि किस्ता तिर्न नपर्ने (Deferral or extension of EMI periods)",NA
+"n_rcvry_preferred_incentives","9",44,"0.431373",343,NA,"सामाजिक सुरक्षाको व्यवस्था",NA
+"n_rcvry_preferred_incentives","10",34,"0.333333",344,NA,"अनुदान",NA
+"n_rcvry_preferred_incentives","11",74,"0.72549",345,NA,"मानसिक तनाव कम गर्न स्वास्थ्य परामर्श",NA
+"n_rcvry_preferred_incentives","12",102,"1",346,NA,"अन्य",NA
+"n_rcvry_preferred_incentives","13",101,"0.990196",347,NA,"मलाई कोभिड-१९ ले कुनै प्रकारको असर गरेन",NA
+"i_empl_covid_effects","1",11,"0.107843",349,NA,"रोजगार गुमाउनुपर्यो",NA
+"i_empl_covid_effects","2",90,"0.882353",350,NA,"स्व-रोजगार गुमाउनुपर्यो",NA
+"i_empl_covid_effects","3",93,"0.911765",351,NA,"मन नलागेको काम गर्नुपर्यो",NA
+"i_empl_covid_effects","4",79,"0.77451",352,NA,"तलब कटौती भयो",NA
+"i_empl_covid_effects","5",90,"0.882353",353,NA,"पालो गरेर/कुरेर काम गर्नुपर्यो (Rotational employment)",NA
+"i_empl_covid_effects","6",91,"0.892157",354,NA,"कामको लागि आवश्यक लाइसेन्स (license), परमिट (permit) आदि लिन / नवीकारण गर्न पाइएन",NA
+"i_empl_covid_effects","7",94,"0.921569",355,NA,"अन्य समस्या भोग्नुपर्यो",NA
+"i_empl_covid_effects","8",101,"0.990196",356,NA,"केहि भोग्नुपरेन",NA
+"i_econ_covid_effects","1",82,"0.803922",358,NA,"पैसा सापटी लिनुपर्यो (बैंक वा अन्य वित्तीय संस्थाबाट)",NA
+"i_econ_covid_effects","2",11,"0.107843",359,NA,"पैसा सापटी लिनुपर्यो (साथीभाइ वा आफन्तीबाट)",NA
+"i_econ_covid_effects","3",75,"0.735294",360,NA,"परिवारमा कसैको शिक्षा रोक्नुपर्यो",NA
+"i_econ_covid_effects","4",85,"0.833333",361,NA,"परिवारमा कसैको स्वास्थ्य सम्बन्धि सेवा रोक्नुपर्यो",NA
+"i_econ_covid_effects","5",80,"0.784314",362,NA,"गहना, टी.भी., फ्रिज, मोटरसाइकल, गाडी जस्ता सामानहरू बेच्नुपर्यो (घराएसी प्रयोजनको सामान)",NA
+"i_econ_covid_effects","6",95,"0.931373",363,NA,"आफ्नो रोजगारको लागि आवश्यक पर्ने सामान जस्तै क्यामेरा, आदि बेच्नुपर्यो",NA
+"i_econ_covid_effects","7",94,"0.921569",364,NA,"घर-जग्गा बेच्नुपर्यो",NA
+"i_econ_covid_effects","8",96,"0.941176",365,NA,"अन्य समस्या भोग्नुपर्यो",NA
+"i_econ_covid_effects","9",100,"0.980392",366,NA,"केहि भोग्नुपरेन",NA
+"b_empl_wrk_type","1",13,"0.127451",368,NA,"मौसमी काम (seasonal work)",NA
+"b_empl_wrk_type","2",85,"0.833333",369,NA,"दैनिकी ज्याला / ज्यालादारी काम (daily wages)",NA
+"b_empl_wrk_type","3",91,"0.892157",370,NA,"मासिक तलब आउने काम (monthly salary)",NA
+"b_empl_wrk_type","4",101,"0.990196",371,NA,"अन्य",NA
+"b_empl_trsm_org","1",97,"0.95098",373,NA,"ANTWU",NA
+"b_empl_trsm_org","2",101,"0.990196",374,NA,"NIHWU",NA
+"b_empl_trsm_org","3",35,"0.343137",375,NA,"NITWOG",NA
+"b_empl_trsm_org","4",102,"1",376,NA,"NSPWTU",NA
+"b_empl_trsm_org","5",100,"0.980392",377,NA,"NTWU",NA
+"b_empl_trsm_org","6",102,"1",378,NA,"RTWUN",NA
+"b_empl_trsm_org","7",84,"0.823529",379,NA,"UNITRAV",NA
+"b_empl_trsm_org","8",86,"0.843137",380,NA,"अन्य",NA
+"b_empl_trsm_major_districts","1",102,"1",382,"Achham","अछाम",NA
+"b_empl_trsm_major_districts","2",102,"1",383,"Arghakhanchi","अर्घाखाँची",NA
+"b_empl_trsm_major_districts","3",99,"0.970588",384,"Baglung","बागलुङ",NA
+"b_empl_trsm_major_districts","4",102,"1",385,"Baitadi","बैतडी",NA
+"b_empl_trsm_major_districts","5",100,"0.980392",386,"Bajhang","बझाङ",NA
+"b_empl_trsm_major_districts","6",102,"1",387,"Bajura","बाजुरा",NA
+"b_empl_trsm_major_districts","7",101,"0.990196",388,"Banke","बाँके",NA
+"b_empl_trsm_major_districts","8",102,"1",389,"Bara","बारा",NA
+"b_empl_trsm_major_districts","9",99,"0.970588",390,"Bardiya","बर्दिया",NA
+"b_empl_trsm_major_districts","10",84,"0.823529",391,"Bhaktapur","भक्तपुर",NA
+"b_empl_trsm_major_districts","11",101,"0.990196",392,"Bhojpur","भोजपुर",NA
+"b_empl_trsm_major_districts","12",75,"0.735294",393,"Chitawan","चितवन",NA
+"b_empl_trsm_major_districts","13",101,"0.990196",394,"Dadeldhura","डडेलधुरा",NA
+"b_empl_trsm_major_districts","14",101,"0.990196",395,"Dailekh","दैलेख",NA
+"b_empl_trsm_major_districts","15",102,"1",396,"Dang","दाङ",NA
+"b_empl_trsm_major_districts","16",98,"0.960784",397,"Darchula","दार्चुला",NA
+"b_empl_trsm_major_districts","17",90,"0.882353",398,"Dhading","धादिङ",NA
+"b_empl_trsm_major_districts","18",101,"0.990196",399,"Dhankuta","धनकुटा",NA
+"b_empl_trsm_major_districts","19",101,"0.990196",400,"Dhanusa","धनुषा",NA
+"b_empl_trsm_major_districts","20",79,"0.77451",401,"Dolakha","दोलखा",NA
+"b_empl_trsm_major_districts","21",76,"0.745098",402,"Dolpa","डोल्पा",NA
+"b_empl_trsm_major_districts","22",102,"1",403,"Doti","डोटी",NA
+"b_empl_trsm_major_districts","23",49,"0.480392",404,"Gorkha","गोरखा",NA
+"b_empl_trsm_major_districts","24",100,"0.980392",405,"Gulmi","गुल्मी",NA
+"b_empl_trsm_major_districts","25",89,"0.872549",406,"Humla","हुम्ला",NA
+"b_empl_trsm_major_districts","26",95,"0.931373",407,"Ilam","इलाम",NA
+"b_empl_trsm_major_districts","27",97,"0.95098",408,"Jajarkot","जाजरकोट",NA
+"b_empl_trsm_major_districts","28",100,"0.980392",409,"Jhapa","झापा",NA
+"b_empl_trsm_major_districts","29",93,"0.911765",410,"Jumla","जुम्ला",NA
+"b_empl_trsm_major_districts","30",101,"0.990196",411,"Kailali","कैलाली",NA
+"b_empl_trsm_major_districts","31",99,"0.970588",412,"Kalikot","कालिकोट",NA
+"b_empl_trsm_major_districts","32",102,"1",413,"Kanchanpur","कंचनपुर",NA
+"b_empl_trsm_major_districts","33",95,"0.931373",414,"Kapilbastu","कपिलवस्तु",NA
+"b_empl_trsm_major_districts","34",41,"0.401961",415,"Kaski","कास्की",NA
+"b_empl_trsm_major_districts","35",58,"0.568627",416,"Kathmandu","काठमाडौँ",NA
+"b_empl_trsm_major_districts","36",94,"0.921569",417,"Kavrepalanchok","काभ्रेपलान्चोक",NA
+"b_empl_trsm_major_districts","37",101,"0.990196",418,"Khotang","खोटाँग",NA
+"b_empl_trsm_major_districts","38",87,"0.852941",419,"Lalitpur","ललितपुर",NA
+"b_empl_trsm_major_districts","39",82,"0.803922",420,"Lamjung","लमजुङ",NA
+"b_empl_trsm_major_districts","40",101,"0.990196",421,"Mahottari","महोत्तरी",NA
+"b_empl_trsm_major_districts","41",102,"1",422,"Makwanpur","मकवानपुर",NA
+"b_empl_trsm_major_districts","42",42,"0.411765",423,"Manang","मनाङ",NA
+"b_empl_trsm_major_districts","43",100,"0.980392",424,"Morang","मोरंग",NA
+"b_empl_trsm_major_districts","44",88,"0.862745",425,"Mugu","मुगु",NA
+"b_empl_trsm_major_districts","45",47,"0.460784",426,"Mustang","मुस्ताङ",NA
+"b_empl_trsm_major_districts","46",73,"0.715686",427,"Myagdi","म्याग्दी",NA
+"b_empl_trsm_major_districts","47",102,"1",428,"Nawalpur","नवलपुर",NA
+"b_empl_trsm_major_districts","48",102,"1",429,"Parasi","परासी",NA
+"b_empl_trsm_major_districts","49",90,"0.882353",430,"Nuwakot","नुवाकोट",NA
+"b_empl_trsm_major_districts","50",96,"0.941176",431,"Okhaldhunga","ओखलढुंगा",NA
+"b_empl_trsm_major_districts","51",98,"0.960784",432,"Palpa","पाल्पा",NA
+"b_empl_trsm_major_districts","52",101,"0.990196",433,"Panchthar","पांचथर",NA
+"b_empl_trsm_major_districts","53",101,"0.990196",434,"Parbat","पर्वत",NA
+"b_empl_trsm_major_districts","54",102,"1",435,"Parsa","पर्सा",NA
+"b_empl_trsm_major_districts","55",102,"1",436,"Pyuthan","प्युठान",NA
+"b_empl_trsm_major_districts","56",93,"0.911765",437,"Ramechhap","रामेछाप",NA
+"b_empl_trsm_major_districts","57",48,"0.470588",438,"Rasuwa","रसुवा",NA
+"b_empl_trsm_major_districts","58",101,"0.990196",439,"Rautahat","रौतहट",NA
+"b_empl_trsm_major_districts","59",98,"0.960784",440,"Rolpa","रोल्पा",NA
+"b_empl_trsm_major_districts","60",96,"0.941176",441,"Rukum East","पूर्वी रूकुम",NA
+"b_empl_trsm_major_districts","61",97,"0.95098",442,"Rukum West","पश्चिमी रूकुम",NA
+"b_empl_trsm_major_districts","62",98,"0.960784",443,"Rupandehi","रुपन्देही",NA
+"b_empl_trsm_major_districts","63",102,"1",444,"Salyan","सल्यान",NA
+"b_empl_trsm_major_districts","64",86,"0.843137",445,"Sankhuwasabha","संखुवासभा",NA
+"b_empl_trsm_major_districts","65",102,"1",446,"Saptari","सप्तरी",NA
+"b_empl_trsm_major_districts","66",100,"0.980392",447,"Sarlahi","सर्लाही",NA
+"b_empl_trsm_major_districts","67",99,"0.970588",448,"Sindhuli","सिन्धुली",NA
+"b_empl_trsm_major_districts","68",81,"0.794118",449,"Sindhupalchok","सिन्धुपाल्चोक",NA
+"b_empl_trsm_major_districts","69",102,"1",450,"Siraha","सिराहा",NA
+"b_empl_trsm_major_districts","70",25,"0.245098",451,"Solukhumbu","सोलुखुम्बू",NA
+"b_empl_trsm_major_districts","71",101,"0.990196",452,"Sunsari","सुनसरी",NA
+"b_empl_trsm_major_districts","72",101,"0.990196",453,"Surkhet","सुर्खेत",NA
+"b_empl_trsm_major_districts","73",99,"0.970588",454,"Syangja","स्याङग्जा",NA
+"b_empl_trsm_major_districts","74",95,"0.931373",455,"Tanahu","तनहुँ",NA
+"b_empl_trsm_major_districts","75",81,"0.794118",456,"Taplejung","ताप्लेजुंग",NA
+"b_empl_trsm_major_districts","76",98,"0.960784",457,"Terhathum","तेह्रथुम",NA
+"b_empl_trsm_major_districts","77",102,"1",458,"Udayapur","उदयपुर",NA
+"b_empl_occpatn_pre_covid","1",102,"1",459,NA,"पसले (पसलमा काम गर्ने)",NA
+"b_empl_occpatn_pre_covid","2",90,"0.882353",460,NA,"टूर गाईड",NA
+"b_empl_occpatn_pre_covid","3",29,"0.284314",461,NA,"ट्रेकिंग गाईड",NA
+"b_empl_occpatn_pre_covid","4",98,"0.960784",462,NA,"राफ्टिंग गाईड",NA
+"b_empl_occpatn_pre_covid","5",79,"0.77451",463,NA,"माउन्टेन गाईड",NA
+"b_empl_occpatn_pre_covid","6",100,"0.980392",464,NA,"ड्राइभर",NA
+"b_empl_occpatn_pre_covid","7",102,"1",465,NA,"ट्राभेल एजेन्ट",NA
+"b_empl_occpatn_pre_covid","8",101,"0.990196",466,NA,"फ्लाइट अटेन्डेंट",NA
+"b_empl_occpatn_pre_covid","9",102,"1",467,NA,"पाइलट",NA
+"b_empl_occpatn_pre_covid","10",101,"0.990196",468,NA,"शेफ / कुक",NA
+"b_empl_occpatn_pre_covid","11",102,"1",469,NA,"होटेल म्यानेजर",NA
+"b_empl_occpatn_pre_covid","12",101,"0.990196",470,NA,"होटेल स्टाफ",NA
+"b_empl_occpatn_pre_covid","13",101,"0.990196",471,NA,"वेटर",NA
+"b_empl_occpatn_pre_covid","14",102,"1",472,NA,"बार टेण्डर",NA
+"b_empl_occpatn_pre_covid","15",99,"0.970588",473,NA,"पोर्टर (भरिया)",NA
+"b_empl_occpatn_pre_covid","16",97,"0.95098",474,NA,"अन्य",NA
