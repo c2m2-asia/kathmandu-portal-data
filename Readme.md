@@ -25,17 +25,13 @@ This repo contains all the R code for C2M2 Kathmandu portal, from KoboCollect to
 
 #### April 25, 2021
 
+---
+
 - Ran into an issue with RPostgreSQL not installing in linux. Use this command to fix: `sudo apt-get install libpq-dev`
 
-#### April 21, 2021
-
-
-- Wasn't able to correctly parse UTF-8 files in windows. Issue arose when trying to import labels for survey question choises. I had to switch to RStudio Server in WSL2 ([how-to here](https://support.rstudio.com/hc/en-us/articles/360049776974-Using-RStudio-Server-in-Windows-WSL2))
 
 - Exporting PG database steps:
 
-
-1. Create dump from PG
 ```
 
 Inside the container:
@@ -47,6 +43,13 @@ pg_dump -U c2m2 -h localhost c2m2 >> /var/tmp/c2m2_dump.sql
 Outside the container:
 docker cp <CONTAINER_ID>:/var/tmp/c2m2_dump.sql ./
 ```
+
+#### April 21, 2021
+
+---
+
+- Wasn't able to correctly parse UTF-8 files in windows. Issue arose when trying to import labels for survey question choises. I had to switch to RStudio Server in WSL2 ([how-to here](https://support.rstudio.com/hc/en-us/articles/360049776974-Using-RStudio-Server-in-Windows-WSL2))
+
 
 #### March 25, 2021
 
