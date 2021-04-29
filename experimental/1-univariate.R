@@ -5,6 +5,8 @@
 # Libraries
 library(tidyr)
 library(reshape2)
+
+
 # Imports
 source("~/projects/c2m2/kathmandu-survey/utils/functions.R")
 source("~/projects/c2m2/kathmandu-survey/utils/constants.R")
@@ -40,26 +42,13 @@ path <- paste0(ROOT_URL, "misc/mapping.xlsx")
 mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en)
 uni_w_labels <- left_join(allUnivariate, mapping)
 
+
+
+
 IO.SaveCsv(uni_w_labels, "uni_w_labels", CSV_EXPORT_PATH)
 IO.SaveJson(uni_w_labels, "uni_w_labels", JSON_EXPORT_PATH)
 
-PRCS.GetDistByVar <- function(DF, VAR) {
-  return(DF %>% filter(variable==VAR))
-}
-
-
-UNI.GenerateDistForEachVar <- function(DF) {
-  uVars <- unique(DF$variable)
-  for(u in uVars){
-    subsetDF <- PRCS.GetDistByVar(DF, u)
-    IO.SaveJson(subsetDF, paste0("dist_", u), paste0(JSON_EXPORT_PATH, "/chartinput/"), dates = F)
-  }
-  
-    
-}
 
 # Write to DB
 DB.WriteToDb(DB.GetCon(), df = uni_w_labels, "workers_univariate_stats")
-
-
 UNI.GenerateDistForEachVar(uni_w_labels)

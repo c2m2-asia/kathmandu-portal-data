@@ -63,7 +63,7 @@ names(bivariate_w_label)[10]<-"perc_of_total"
 
 
 # Write to DB
-DB.WriteToDb(DB.GetCon(), df = bivariateFinal, "workers_bivariate_stats")
+DB.WriteToDb(DB.GetCon(), df = bivariate_w_label, "workers_bivariate_stats")
 
 
 

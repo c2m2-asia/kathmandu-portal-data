@@ -132,9 +132,7 @@ UNI.GetCountsAndProportionsMSMultiQues <- function(DF, PREFIXES) {
     names <- names(DF)[ grepl( p , names( DF ) )]
     names <- names[ !grepl( "*rnk*" , names )]
     names <- names[ !grepl( "*_other" , names )]
-    print(p)
     countsAndProportions <- UNI.GetCountsAndProportionsMSOneQues(DF, names, CATEGORY_LABEL = toString(p), GROUP_BY_VAR = "universe")
-    
     countsAndProportionsTable = rbind(countsAndProportions, countsAndProportionsTable)
     
     
@@ -151,6 +149,21 @@ PRCS.GetMultiSelectNamesFromPrefix <- function(DF, PREFIX) {
   names <- names[ !grepl( "*_other" , names )]
     # DF[]
   return(names)
+}
+
+PRCS.GetDistByVar <- function(DF, VAR) {
+  return(DF %>% filter(variable==VAR))
+}
+
+
+UNI.GenerateDistForEachVar <- function(DF) {
+  uVars <- unique(DF$variable)
+  for(u in uVars){
+    subsetDF <- PRCS.GetDistByVar(DF, u)
+    IO.SaveJson(subsetDF, paste0("dist_", u), paste0(JSON_EXPORT_PATH, "/chartinput/"), dates = F)
+  }
+  
+  
 }
 
 
