@@ -3,7 +3,7 @@ source("~/projects/c2m2/kathmandu-survey/utils/functions.R")
 source("~/projects/c2m2/kathmandu-survey/utils/constants.R")
 
 # Parameters
-survey_data_path <- paste0(ROOT_URL, "raw/data/workers_data_20210425.xlsx")
+survey_data_path <- paste0(ROOT_URL, "raw/data/workers_data_20210429.xlsx")
 
 # Survey data
 workers_data <- IO.XlsSheetToDF(excel_sheets(survey_data_path)[1], survey_data_path)
@@ -15,30 +15,21 @@ workers <- workers_data %>% filter(!is.na(m_gender))
 # Functions
 SaveChartData <- function(DF, VARS, FILE) {
   final <- UNI.GetCountsAndProportionsSS(DF, VARS) 
-  
   final <- final %>% 
     filter(value!=FALSE) %>% 
     select(variable, perc_of_total) %>%
     rename(label=variable, value=perc_of_total)
-  
-  
-  IO.SaveJson(final, FILE, JSON_EXPORT_PATH, F)
-  
+  IO.SaveJson(final, FILE, JSON_EXPORT_PATH)
   return(final)
 }
 
 SaveDistData <- function(DF, VAR, FILE) {
   dist <- UNI.GetCountsAndProportionsSS(DF, c(VAR))
-
-  
   path <- paste0(ROOT_URL, "misc/mapping.xlsx")
   mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en)
   dist_w_labels <- left_join(dist, mapping)
-  
-  IO.SaveJson(dist_w_labels, FILE, JSON_EXPORT_PATH, F)
-  
+  IO.SaveJson(dist_w_labels, FILE, JSON_EXPORT_PATH)
 }
-
 
 # Code
 
@@ -52,6 +43,24 @@ SaveChartData(workers, SET1, "LostJobsSplit")
 
 
 
+
+workers <- workers %>% mutate(d_occptn_travel_and_tour_guides = ifelse((b_empl_occpatn_pre_covid__2 == 1 | b_empl_occpatn_pre_covid__3 == 1 | b_empl_occpatn_pre_covid__4 == 1 | b_empl_occpatn_pre_covid__5 == 1 | b_empl_occpatn_pre_covid__15 == 1), T, F ) )
+workers <- workers %>% mutate(d_occptn_travel_and_tour_other = ifelse((b_empl_occpatn_pre_covid__6 == 1 | b_empl_occpatn_pre_covid__7 == 1 | b_empl_occpatn_pre_covid__8 == 1 | b_empl_occpatn_pre_covid__9 == 1), T, F ) )
+workers <- workers %>% mutate(d_occptn_accomodation_hotel_food = ifelse((b_empl_occpatn_pre_covid__10 == 1 | b_empl_occpatn_pre_covid__11 == 1 | b_empl_occpatn_pre_covid__12 == 1 | b_empl_occpatn_pre_covid__13 == 1 | b_empl_occpatn_pre_covid__14 == 1), T, F ) )
+workers <- workers %>% mutate(d_occptn_othr = ifelse((b_empl_occpatn_pre_covid__16 == 1), T, F ) )
+
+
+workersss <- workers %>% filter(d_lost_job_still_no_work == T)
+SET1 <- c(
+          "d_occptn_travel_and_tour_guides",
+          "d_occptn_travel_and_tour_other",
+          "d_occptn_accomodation_hotel_food",
+          "d_occptn_othr"
+          )
+SaveChartData(workersss, SET1, "LostJobsBySectorMultiple")
+
+
+
 # Get stayed employed split
 workers <- workers %>% mutate(d_stayed_employed = ifelse((i_empl_covid_effects__1 != 1 & i_empl_covid_effects__2 != 1), T, F ))
 workers <- workers %>% mutate(d_employed_but_in_low_salary = ifelse(((i_empl_covid_effects__4 == 1) & (i_empl_covid_effects__1 != 1) & (i_empl_covid_effects__2 != 1)), T, F ))
@@ -60,8 +69,48 @@ workers <- workers %>% mutate(d_employed_kept_salary = ifelse(((i_empl_covid_eff
 SET2 <- c("d_stayed_employed","d_employed_kept_salary","d_employed_but_in_low_salary")
 SaveChartData(workers, SET2, "StayedEmployedSplit")
 
-# Get time since last salary dist
-SaveDistData(workers, "i_empl_lst_date_full_salary", "LastDateFullSalaryDist")
+# Get stayed employed by sector split
+workersss <- workers %>% filter(d_stayed_employed == T)
+SET1 <- c(
+          "d_occptn_travel_and_tour_guides",
+          "d_occptn_travel_and_tour_other",
+          "d_occptn_accomodation_hotel_food",
+          "d_occptn_othr"
+)
+SaveChartData(workersss, SET1, "HeldJobsBySectorMultiple")
+
+
+# Presently employed + employment status change split
+workers <- workers %>% mutate(d_presently_employed = ifelse((d_stayed_employed == T | d_lost_job_but_working_now == T), T, F ))
+SET3 <- c("d_presently_employed", "d_lost_job_but_working_now", "d_stayed_employed")
+SaveChartData(workers, SET3, "PresentlyEmployedEmplStatusSplit")
+
+
+# Presently employed + lost salary
+workers <- workers %>% mutate(d_presently_employed = ifelse((d_stayed_employed == T | d_lost_job_but_working_now == T), T, F ))
+workers <- workers %>% mutate(d_presently_employed_salary_cut = ifelse((d_presently_employed == T & i_empl_lst_date_full_salary == 1), T, F ))
+workers <- workers %>% mutate(d_presently_employed_back_to_old_salary = ifelse(d_presently_employed == T &  (i_empl_lst_date_full_salary == 2 | i_empl_lst_date_full_salary == 3 | i_empl_lst_date_full_salary == 4 | i_empl_lst_date_full_salary == 5 ), T, F ))
+SET3 <- c("d_presently_employed", "d_presently_employed_salary_cut", "d_presently_employed_back_to_old_salary")
+SaveChartData(workers, SET3, "PresentlyEmployedSalaryCutSplit")
+
+
+# Get time since last salary dist for presently employed folks
+workers_presently_employed <- workers %>% filter(d_presently_employed == T)
+SaveDistData(workers_presently_employed, "i_empl_lst_date_full_salary", "LastDateFullSalaryDistPresentlyEmployed")
+
+
+# Presently employed split by sector change
+workers <- workers %>% mutate(d_presently_employed_swtch_occupatn = ifelse((d_presently_employed == T &  (i_empl_jb_in_tourism_change == 1 | i_empl_jb_in_tourism_change_add == 1) ), T, F ))
+workers <- workers %>% mutate(d_presently_employed_same_occupatn = ifelse((d_presently_employed == T &  (i_empl_jb_in_tourism_change == 2 | i_empl_jb_in_tourism_change_add == 2) ), T, F ))
+SET3 <- c("d_presently_employed", "d_presently_employed_swtch_occupatn", "d_presently_employed_same_occupatn")
+SaveChartData(workers, SET3, "PresentlyEmployedOccupationSplit")
+
+
+
+
+# workersss <- workers %>% select(i_empl_jb_prsnt_status, i_empl_jb_in_tourism_change, i_empl_jb_in_tourism_change_add)
+
+
 
 
 # Get assets sold small multiples

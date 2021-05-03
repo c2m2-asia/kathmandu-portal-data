@@ -39,10 +39,16 @@ MISC.GetFileName <- function(NAME, PATH) {
   return(paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".csv"))
 }
 
-IO.SaveJson <- function(DF, NAME, PATH, dates=T) {
+IO.SaveJson <- function(DF, NAME, PATH, dates=T, dayOnly=T) {
   exportJSON <- toJSON(DF)
   if(dates == T) {
-    write(exportJSON, paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".json"))
+        
+    if(dayOnly == T) {
+      write(exportJSON, paste0(PATH, NAME, format(Sys.time(),'_%Y%mm%d'), ".json"))
+    } else {
+      write(exportJSON, paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".json"))
+    }
+    
     
   } else {
     write(exportJSON, paste0(PATH, NAME, ".json"))
