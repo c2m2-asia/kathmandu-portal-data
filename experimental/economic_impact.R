@@ -11,7 +11,6 @@ workers_data <- IO.XlsSheetToDF(excel_sheets(survey_data_path)[1], survey_data_p
 # Remove rows with NAs
 workers <- workers_data %>% filter(!is.na(m_gender))
 
-
 # Functions
 SaveChartData <- function(DF, VARS, FILE) {
   final <- UNI.GetCountsAndProportionsSS(DF, VARS) 
@@ -44,20 +43,20 @@ SaveChartData(workers, SET1, "LostJobsSplit")
 
 
 
-workers <- workers %>% mutate(d_occptn_travel_and_tour_guides = ifelse((b_empl_occpatn_pre_covid__2 == 1 | b_empl_occpatn_pre_covid__3 == 1 | b_empl_occpatn_pre_covid__4 == 1 | b_empl_occpatn_pre_covid__5 == 1 | b_empl_occpatn_pre_covid__15 == 1), T, F ) )
-workers <- workers %>% mutate(d_occptn_travel_and_tour_other = ifelse((b_empl_occpatn_pre_covid__6 == 1 | b_empl_occpatn_pre_covid__7 == 1 | b_empl_occpatn_pre_covid__8 == 1 | b_empl_occpatn_pre_covid__9 == 1), T, F ) )
-workers <- workers %>% mutate(d_occptn_accomodation_hotel_food = ifelse((b_empl_occpatn_pre_covid__10 == 1 | b_empl_occpatn_pre_covid__11 == 1 | b_empl_occpatn_pre_covid__12 == 1 | b_empl_occpatn_pre_covid__13 == 1 | b_empl_occpatn_pre_covid__14 == 1), T, F ) )
-workers <- workers %>% mutate(d_occptn_othr = ifelse((b_empl_occpatn_pre_covid__16 == 1), T, F ) )
-
-
-workersss <- workers %>% filter(d_lost_job_still_no_work == T)
-SET1 <- c(
-          "d_occptn_travel_and_tour_guides",
-          "d_occptn_travel_and_tour_other",
-          "d_occptn_accomodation_hotel_food",
-          "d_occptn_othr"
-          )
-SaveChartData(workersss, SET1, "LostJobsBySectorMultiple")
+# workers <- workers %>% mutate(d_occptn_travel_and_tour_guides = ifelse((b_empl_occpatn_pre_covid__2 == 1 | b_empl_occpatn_pre_covid__3 == 1 | b_empl_occpatn_pre_covid__4 == 1 | b_empl_occpatn_pre_covid__5 == 1 | b_empl_occpatn_pre_covid__15 == 1), T, F ) )
+# workers <- workers %>% mutate(d_occptn_travel_and_tour_other = ifelse((b_empl_occpatn_pre_covid__6 == 1 | b_empl_occpatn_pre_covid__7 == 1 | b_empl_occpatn_pre_covid__8 == 1 | b_empl_occpatn_pre_covid__9 == 1), T, F ) )
+# workers <- workers %>% mutate(d_occptn_accomodation_hotel_food = ifelse((b_empl_occpatn_pre_covid__10 == 1 | b_empl_occpatn_pre_covid__11 == 1 | b_empl_occpatn_pre_covid__12 == 1 | b_empl_occpatn_pre_covid__13 == 1 | b_empl_occpatn_pre_covid__14 == 1), T, F ) )
+# workers <- workers %>% mutate(d_occptn_othr = ifelse((b_empl_occpatn_pre_covid__16 == 1), T, F ) )
+# 
+# 
+# workersss <- workers %>% filter(d_lost_job_still_no_work == T)
+# SET1 <- c(
+#           "d_occptn_travel_and_tour_guides",
+#           "d_occptn_travel_and_tour_other",
+#           "d_occptn_accomodation_hotel_food",
+#           "d_occptn_othr"
+#           )
+# SaveChartData(workersss, SET1, "LostJobsBySectorMultiple")
 
 
 

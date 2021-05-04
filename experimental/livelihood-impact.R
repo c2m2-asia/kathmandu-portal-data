@@ -38,8 +38,78 @@ workers <- workers %>% mutate(d_occptn_travel = ifelse((b_empl_occpatn_pre_covid
 workers <- workers %>% mutate(d_occptn_accomodation = ifelse((b_empl_occpatn_pre_covid__10 == 1 | b_empl_occpatn_pre_covid__11 == 1 | b_empl_occpatn_pre_covid__12 == 1 | b_empl_occpatn_pre_covid__13 == 1 | b_empl_occpatn_pre_covid__14 == 1), T, F ) )
 workers <- workers %>% mutate(d_occptn_othr = ifelse((b_empl_occpatn_pre_covid__16 == 1), T, F ) )
 
-SET1 <- c("d_occptn_exp_selling","d_occptn_travel","d_occptn_accomodation", "d_occptn_othr")
+SET1 <- c("d_occptn_exp_selling","d_occptn_accomodation","d_occptn_travel", "d_occptn_othr")
 SaveChartData(workers, SET1, "SectoralBreakdownMultiple")
+
+
+# Explore sector 1
+workers <- workers %>% mutate(d_stayed_employed = ifelse((i_empl_covid_effects__1 != 1 & i_empl_covid_effects__2 != 1), T, F ))
+workers <- workers %>% mutate(d_employed_but_in_low_salary = ifelse(((i_empl_covid_effects__4 == 1) & (i_empl_covid_effects__1 != 1) & (i_empl_covid_effects__2 != 1)), T, F ))
+workers <- workers %>% mutate(d_employed_kept_salary = ifelse(((i_empl_covid_effects__4 != 1) & (i_empl_covid_effects__1 != 1) & (i_empl_covid_effects__2 != 1)), T, F ))
+workers <- workers %>% mutate(d_lost_job = ifelse((i_empl_covid_effects__1 == 1 | i_empl_covid_effects__2 == 1), T, F ))
+workers <- workers %>% mutate(d_lost_job_but_working_now = ifelse((d_lost_job == T & (i_empl_jb_prsnt_status == 1 | i_empl_jb_prsnt_status == 2)), T, F ))
+workers <- workers %>% mutate(d_lost_job_still_no_work = ifelse((d_lost_job == T & (i_empl_jb_prsnt_status != 1 & i_empl_jb_prsnt_status != 2)), T, F ))
+workers <- workers %>% mutate(d_presently_employed = ifelse((d_stayed_employed == T | d_lost_job_but_working_now == T), T, F ))
+
+
+
+# Sector 1: Employment status at present.
+workers <- workers %>% mutate(d_presently_employed_1 =  ifelse((d_presently_employed == T & d_occptn_exp_selling==T), T, F))
+workers <- workers %>% mutate(d_presently_unemployed_1 =  ifelse((d_lost_job_still_no_work == T & d_occptn_exp_selling==T), T, F))
+SET1 <- c("d_occptn_exp_selling","d_presently_employed_1","d_presently_unemployed_1")
+SaveChartData(workers, SET1, "ExpSellUnemploymentSplit")
+
+
+# Sector 1: Switching occupation
+workers <- workers %>% mutate(d_switched_occupation = ifelse((i_empl_jb_in_tourism_change == 2 | i_empl_jb_in_tourism_change_add == 2), T, F )) %>% mutate(d_switched_occupation = ifelse(is.na(d_switched_occupation), F, d_switched_occupation))
+workers <- workers %>% mutate(d_prsntly_empl_switched_occupation_1 =  ifelse((d_switched_occupation == T & d_occptn_exp_selling==T & d_presently_employed == T), T, F))
+workers <- workers %>% mutate(d_prsntly_empl_didnt_switch_1 =  ifelse((d_switched_occupation == F & d_occptn_exp_selling==T & d_presently_employed == T ), T, F))
+SET1 <- c("d_presently_employed_1","d_prsntly_empl_switched_occupation_1","d_prsntly_empl_didnt_switch_1")
+SaveChartData(workers, SET1, "ExpSellEmployedJobChangeSplit")
+
+
+
+# QC Needed
+workers <- workers %>% mutate(d_switched_self_location_once_1 = ifelse(((i_lvlhd_domicile_chng_self == 1  | i_lvlhd_domicile_chng_self == 2 |  i_lvlhd_domicile_chng_self == 3) &  d_occptn_exp_selling==T), T, F))
+workers <- workers %>% mutate(d_switched_self_location_permanently_neighbourhood_1 = ifelse(((i_lvlhd_domicile_chng_self == 2 ) &  d_occptn_exp_selling==T), T, F))
+workers <- workers %>% mutate(d_switched_self_location_permanently_city_1 = ifelse(((i_lvlhd_domicile_chng_self == 3 ) &  d_occptn_exp_selling==T), T, F))
+workers <- workers %>% mutate(d_switched_self_location_temp_1 = ifelse(((i_lvlhd_domicile_chng_self == 4) &  d_occptn_exp_selling==T), T, F))
+workers <- workers %>% mutate(d_switched_self_location_never_1 = ifelse(((i_lvlhd_domicile_chng_self == 1) &  d_occptn_exp_selling==T), T, F))
+
+SET1 <- c("d_occptn_exp_selling","d_switched_self_location_once_1", "d_switched_self_location_never_1")
+SaveChartData(workers, SET1, "ExpSellMoveNoMoveSplit")
+
+
+
+SET1 <- c("d_switched_self_location_once_1","d_switched_self_location_permanently_neighbourhood_1", "d_switched_self_location_permanently_city_1","d_switched_self_location_temp_1")
+SaveChartData(workers, SET1, "ExpSellMoveNatureSplit")
+
+
+# Sector 1: switching location
+
+
+
+
+
+workers$d_prsntly_empl_switched_occupation_same_sectr
+
+
+
+ifelse((workers$i_empl_jb_in_tourism_change==2 | workers$i_empl_jb_in_tourism_change_add == 2), T,F)
+
+
+
+# Sector 1: Impact on family members
+workers <- workers %>% mutate(d_had_to_stop_someones_ed= ifelse(i_econ_covid_effects__3 == 1, T, F))
+workers <- workers %>% mutate(d_had_to_stop_someones_healthservices= ifelse(i_econ_covid_effects__4 == 1, T, F))
+workers <- workers %>% mutate(d_cldnt_rnew_licens= ifelse(i_empl_covid_effects__6 == 1, T, F))
+
+
+
+
+
+
+workers <- workers %>%  mutate(d_presently_employed_switched_profession_1 =  ifelse((d_presently_employed == T & d_occptn_exp_selling==T), T, F))
 
 
 
