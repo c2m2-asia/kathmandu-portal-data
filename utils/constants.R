@@ -1,5 +1,5 @@
 # PATHS
-ROOT_URL <- "~/projects/c2m2/kathmandu-survey/"
+ROOT_URL <- "/home/samyoga/KLL/kathmandu-portal-data/"
 JSON_EXPORT_PATH <- paste0(ROOT_URL, "exports/json/")
 CSV_EXPORT_PATH <- paste0(ROOT_URL, "exports/csv/")
 

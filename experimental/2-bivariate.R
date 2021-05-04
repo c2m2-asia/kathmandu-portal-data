@@ -9,11 +9,11 @@ library(stringr)
 
 
 # Imports
-source("~/projects/c2m2/kathmandu-survey/utils/functions.R")
-source("~/projects/c2m2/kathmandu-survey/utils/constants.R")
+source("/home/samyoga/KLL/kathmandu-portal-data/utils/functions.R")
+source("/home/samyoga/KLL/kathmandu-portal-data/utils/constants.R")
 
 # Parameters
-survey_data_path <- paste0(ROOT_URL, "raw/data/workers_data_20210420.xlsx")
+survey_data_path <- paste0(ROOT_URL, "raw/data/workers_data_20210503.xlsx")
 
 
 

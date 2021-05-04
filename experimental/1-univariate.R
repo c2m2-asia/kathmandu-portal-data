@@ -8,11 +8,11 @@ library(reshape2)
 
 
 # Imports
-source("~/projects/c2m2/kathmandu-survey/utils/functions.R")
-source("~/projects/c2m2/kathmandu-survey/utils/constants.R")
+source("/home/samyoga/KLL/kathmandu-portal-data/utils/functions.R")
+source("/home/samyoga/KLL/kathmandu-portal-data/utils/constants.R")
 
 # Parameters
-survey_data_path <- paste0(ROOT_URL, "raw/data/workers_data_20210425.xlsx")
+survey_data_path <- paste0(ROOT_URL, "raw/data/workers_data_20210503.xlsx")
 
 
 
@@ -39,7 +39,7 @@ allUnivariate <- rbind(univariateStatsForSS, univariateStatsForMS)#$#
 
 
 path <- paste0(ROOT_URL, "misc/mapping.xlsx")
-mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en)
+mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(choice_code, variable, value, label_ne, label_en, variable_group)
 uni_w_labels <- left_join(allUnivariate, mapping)
 
 
