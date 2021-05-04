@@ -51,19 +51,20 @@ bivariateFinal <- rbind(bivariateFinal, bivariateStatsMsMs)
 IO.SaveCsv(bivariateFinal, "bivariateStatsExhaustive", CSV_EXPORT_PATH)
 
 
-mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en)
+mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en, variable_group)
 bivariate_w_label <- left_join(bivariateFinal, mapping, by = c("x_variable"="variable", "x_value"="value"))
 names(bivariate_w_label)[7:8] <- c("x_label_ne", "x_label_en")
 
 bivariate_w_label <- left_join(bivariate_w_label, mapping, by = c("y_variable"="variable", "y_value"="value"))
-names(bivariate_w_label)[9:10] <- c("y_label_ne", "y_label_en")
-bivariate_w_label <- bivariate_w_label %>% select(x_variable, x_value, x_label_ne, x_label_en, y_variable, y_value, y_label_ne, y_label_en, total, perc )
-names(bivariate_w_label)[10]<-"perc_of_total"
+names(bivariate_w_label)[10:11] <- c("y_label_ne", "y_label_en")
+bivariate_w_label <- bivariate_w_label %>% select(x_variable, x_value, x_label_ne, x_label_en, y_variable, y_value, y_label_ne, y_label_en, total, perc, variable_group.y )
+names(bivariate_w_label)[10:11]<-c("perc_of_total", "variable_group")
 
-
+# Adding auto-increment id
+bivariateFinal1 <- cbind(choice_code = 1:nrow(bivariate_w_label), bivariate_w_label) 
 
 # Write to DB
-DB.WriteToDb(DB.GetCon(), df = bivariate_w_label, "workers_bivariate_stats")
+DB.WriteToDb(DB.GetCon(), df = bivariateFinal1, "workers_bivariate_stats")
 
 
 

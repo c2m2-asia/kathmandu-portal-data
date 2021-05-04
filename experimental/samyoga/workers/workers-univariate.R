@@ -39,7 +39,7 @@ allUnivariate <- rbind(univariateStatsForSS, univariateStatsForMS)#$#
 
 
 path <- paste0(ROOT_URL, "misc/mapping.xlsx")
-mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en)
+mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en, choice_code, variable_group)
 uni_w_labels <- left_join(allUnivariate, mapping)
 
 
