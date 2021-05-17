@@ -28,12 +28,12 @@ workers <- workers_data %>% filter(!is.na(m_gender))
 
 
 # Separate dimensional Variables
-univariateStatsForSS <- UNI.GetCountsAndProportionsSS(workers, SS_VARS)
+univariateStatsForSS <- UNI.GetCountsAndProportionsSS(workers, SS_VARS_WORKERS)
 
 # IO.SaveCsv(univariateStatsForSS, "univariateStats", CSV_EXPORT_PATH)
 # IO.SaveJson(univariateStatsForSS, "univariateStats", JSON_EXPORT_PATH)
 
-univariateStatsForMS <- UNI.GetCountsAndProportionsMSMultiQues(workers, MS_VARS)
+univariateStatsForMS <- UNI.GetCountsAndProportionsMSMultiQues(workers, MS_VARS_WORKERS)
 allUnivariate <- rbind(univariateStatsForSS, univariateStatsForMS)#$#
 
 
@@ -45,8 +45,8 @@ uni_w_labels <- left_join(allUnivariate, mapping)
 
 
 
-IO.SaveCsv(uni_w_labels, "uni_w_labels", CSV_EXPORT_PATH)
-IO.SaveJson(uni_w_labels, "uni_w_labels", JSON_EXPORT_PATH)
+IO.SaveCsv(uni_w_labels, "uni_w_labels", CSV_EXPORT_PATH_WORKFORCES)
+IO.SaveJson(uni_w_labels, "uni_w_labels", JSON_EXPORT_PATH_WORKFORCES)
 
 
 # Write to DB

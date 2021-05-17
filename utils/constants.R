@@ -1,7 +1,9 @@
 # PATHS
 ROOT_URL <- "/home/samyoga/KLL/kathmandu-portal-data/"
-JSON_EXPORT_PATH <- paste0(ROOT_URL, "exports/json/")
-CSV_EXPORT_PATH <- paste0(ROOT_URL, "exports/csv/")
+JSON_EXPORT_PATH_WORKFORCES <- paste0(ROOT_URL, "exports/json/workforces")
+CSV_EXPORT_PATH_WORKFORCES <- paste0(ROOT_URL, "exports/csv/workforces")
+JSON_EXPORT_PATH_BUSINESSES <- paste0(ROOT_URL, "exports/json/businesses")
+CSV_EXPORT_PATH_BUSINESSES <- paste0(ROOT_URL, "exports/csv/businesses")
 
 
 # Separate flag variables
@@ -11,7 +13,7 @@ ID_VARS <- c("X_index", "X_uuid", "X_submission_time" )
 META_VARS <- c("m_name", "m_gender",  "m_age", "m_edu_levl","m_years_of_experience", "m_phone") 
 ID_AND_META_VARS <- c(ID_VARS, META_VARS)  
 
-MS_VARS <- c("b_empl_occpatn_pre_covid",
+MS_VARS_WORKERS <- c("b_empl_occpatn_pre_covid",
              "b_empl_trsm_major_districts",
              "b_empl_trsm_org",
              "b_empl_wrk_type",
@@ -28,7 +30,7 @@ MS_VARS <- c("b_empl_occpatn_pre_covid",
              )
 
 
-SS_VARS <- c("b_empl_frml_agrmnt_status_pre_covid",
+SS_VARS_WORKERS <- c("b_empl_frml_agrmnt_status_pre_covid",
                         "b_empl_had_pan_pre_covid",
                         "b_empl_wrk_sesonal_period",
                         "i_econ_incm_chng_self",
@@ -111,4 +113,60 @@ NON_FLAG_VARS <- c(
   "p_lvlhd_lrnd_new_skills"
 )
 
+SS_VARS_BUSINESS <- c("i_econ_stop_business",
+                      "i_econ_stop_business_how_lng",
+                      # "i_covid_effect_business_rnk1",
+                      # "i_covid_effect_business_rnk2",
+                      # "i_covid_effect_business_rnk3",
+                      "i_fin_effect_other",
+                      "b_n_emplyes_pre_covid",
+                      "i_wrkfrc_size_chng_2020_v_2019",
+                      "i_fin_revenue_chng_2020_v_2019",
+                      "i_fin_savings_chng_2020_v_2019",
+                      "p_dedictd_covid_desk",
+                      "n_rcvry_preferred_loan_pybck_incntv",
+                      "n_rcvry_preferred_fund_aprvl_incntv",
+                      "n_rcvry_preferred_fin_source",
+                      "n_rcvry_preferred_tax_asstnc",
+                      "n_rcvry_preferred_tax_asstn_other",
+                      "n_rcvry_preferred_labor_asstnc",
+                      "n_rcvry_preferred_outreach_other",
+                      "o_do_u_know_of_gov_schemes",
+                      "o_covid_how_long_it_last",
+                      "o_econ_impact_revenue_chng_21_v_19",
+                      "o_econ_impact_wrkfrc_chng_21_v_19",
+                      "o_rcvry_biggest_support",
+                      "o_perm_stop_biz_future_retrn_trsm_biz",
+                      "o_perm_stop_biz_start_new_job",
+                      # "m_name_business",
+                      "m_biz_type",
+                      "m_biz_years_in_operation"
+)
+
+MS_VARS_BUSINESS <- c(
+                      "i_covid_effect_business",
+                      "i_wrkfrc_actn_during_covid",
+                      "i_fin_effect_loan_avlblty",
+                      "i_fin_effect_asset_lqdty",
+                      "i_fin_effect_cost_invstmnt",
+                      "i_geog_effect_loc_chng",
+                      "i_fin_effct_eqty_ownrshp",
+                      "b_services_offered_pre_covid",
+                      "b_services_offered_post_covid",
+                      "p_hlth_hhs_measures",
+                      "p_hlth_safety_measures",
+                      # "p_recvry_strategic_actions_internl"
+                      # "p_recvry_strategic_actions_externl",
+                      "n_rcvry_preferred_gov_policy",
+                      "o_expectd_problms_next_6_mnths",
+                      "o_how_efctv_gov_schemes",
+                      # "r_gov_scheme_which_how_efctv",
+                      "o_rcvry_biggest_diffclties",
+                      "o_perm_stop_biz_start_new",
+                      "o_perm_stop_biz_new_biz_trsm_sector",
+                      "o_perm_stop_biz_new_biz_which",
+                      "o_perm_stop_biz_start_new_job_trsm_sector",
+                      "o_perm_stop_biz_new_job_sector",
+                      "m_biz_unn_membrshps"
+)
 

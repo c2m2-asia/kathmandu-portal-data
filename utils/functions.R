@@ -23,6 +23,7 @@ IO.XlsSheetToDF <- function(sheet, xls_file) {
   }, xls_file)
   df <- as.data.frame(df)
   df <- df %>% mutate_if(is.character,as.factor)
+  df <- df %>% mutate_if(is.double,as.factor)
   return(df)
 }
 

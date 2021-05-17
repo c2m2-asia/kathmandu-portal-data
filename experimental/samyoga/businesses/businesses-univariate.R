@@ -12,41 +12,36 @@ source("/home/samyoga/KLL/kathmandu-portal-data/utils/functions.R")
 source("/home/samyoga/KLL/kathmandu-portal-data/utils/constants.R")
 
 # Parameters
-survey_data_path <- paste0(ROOT_URL, "raw/data/business_data_20210504.xlsx")
+survey_data_path <- paste0(ROOT_URL, "raw/data/business_data_20210510.xlsx")
 
 
 # Survey data
 businesses_data <- IO.XlsSheetToDF(excel_sheets(survey_data_path)[1], survey_data_path)
-# summary(workers_data$m_gender)
-# summary(workers_data$b_empl_occpatn_pre_covid)
-# summary(workers_data$m_years_of_experience)
 
 # Remove rows with NAs
 business <- businesses_data %>% filter(!is.na(m_name_business))
 
 
 # Separate dimensional Variables
-univariateStatsForSS <- UNI.GetCountsAndProportionsSS(workers, SS_VARS)
+univariateBusinessStatsForSS <- UNI.GetCountsAndProportionsSS(business, SS_VARS_BUSINESS)
 
 # IO.SaveCsv(univariateStatsForSS, "univariateStats", CSV_EXPORT_PATH)
 # IO.SaveJson(univariateStatsForSS, "univariateStats", JSON_EXPORT_PATH)
 
-univariateStatsForMS <- UNI.GetCountsAndProportionsMSMultiQues(workers, MS_VARS)
-allUnivariate <- rbind(univariateStatsForSS, univariateStatsForMS)#$#
+univariateBusinessStatsForMS <- UNI.GetCountsAndProportionsMSMultiQues(business, MS_VARS_BUSINESS)
+allUnivariate <- rbind(univariateBusinessStatsForSS, univariateBusinessStatsForMS)#$#
 
 
 
-path <- paste0(ROOT_URL, "misc/mapping.xlsx")
-mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en)
+path <- paste0(ROOT_URL, "misc/mapping_business.xlsx")
+mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_en, label_ne, choice_code, variable_group)
 uni_w_labels <- left_join(allUnivariate, mapping)
 
 
-
-
-IO.SaveCsv(uni_w_labels, "uni_w_labels", CSV_EXPORT_PATH)
-IO.SaveJson(uni_w_labels, "uni_w_labels", JSON_EXPORT_PATH)
+IO.SaveCsv(uni_w_labels, "uni_w_labels", CSV_EXPORT_PATH_BUSINESSES)
+IO.SaveJson(uni_w_labels, "uni_w_labels", JSON_EXPORT_PATH_BUSINESSES)
 
 
 # Write to DB
-DB.WriteToDb(DB.GetCon(), df = uni_w_labels, "workers_univariate_stats")
-UNI.GenerateDistForEachVar(uni_w_labels)
+DB.WriteToDb(DB.GetCon(), df = uni_w_labels, "businesses_univariate_stats")
+# UNI.GenerateDistForEachVar(uni_w_labels)

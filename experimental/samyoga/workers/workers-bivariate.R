@@ -38,8 +38,8 @@ workers <- workers_data %>% filter(!is.na(m_gender))
 
 
 # Data Wrangling
-MS_PREFIXES <- MS_VARS
-SS_VARS <- SS_VARS
+MS_PREFIXES <- MS_VARS_WORKERS
+SS_VARS <- SS_VARS_WORKERS
 
 
 bivariateStatsSsMs <- BI.MultiGetPropCountsSsMs(workers, MS_PREFIXES, SS_VARS)
@@ -48,7 +48,6 @@ bivariateStatsMsMs <- BI.MultiGetPropCountMsMs(workers, MS_PREFIXES)
 
 bivariateFinal <- rbind(bivariateStatsSsMs, bivariateStatsSsSs)
 bivariateFinal <- rbind(bivariateFinal, bivariateStatsMsMs)
-IO.SaveCsv(bivariateFinal, "bivariateStatsExhaustive", CSV_EXPORT_PATH)
 
 
 mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en, variable_group)
@@ -62,9 +61,12 @@ names(bivariate_w_label)[10:11]<-c("perc_of_total", "variable_group")
 
 # Adding auto-increment id
 bivariateFinal1 <- cbind(choice_code = 1:nrow(bivariate_w_label), bivariate_w_label) 
+bivariateFinal2 <- bivariateFinal1 %>% filter(!is.na(total))
+
+IO.SaveCsv(bivariateFinal2, "bivariateStatsExhaustive", CSV_EXPORT_PATH_WORKFORCES)
 
 # Write to DB
-DB.WriteToDb(DB.GetCon(), df = bivariateFinal1, "workers_bivariate_stats")
+DB.WriteToDb(DB.GetCon(), df = bivariateFinal2, "workers_bivariate_stats")
 
 
 
