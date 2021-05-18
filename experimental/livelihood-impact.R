@@ -61,7 +61,7 @@ SaveChartData(workers, SET1, "ExpSellUnemploymentSplit")
 
 
 # Sector 1: Switching occupation
-workers <- workers %>% mutate(d_switched_occupation = ifelse((i_empl_jb_in_tourism_change == 2 | i_empl_jb_in_tourism_change_add == 2), T, F )) %>% mutate(d_switched_occupation = ifelse(is.na(d_switched_occupation), F, d_switched_occupation))
+workers <- workers %>% mutate(d_switched_occupation = ifelse((i_empl_jb_in_tourism_change == 1 | i_empl_jb_in_tourism_change_add == 1), T, F )) %>% mutate(d_switched_occupation = ifelse(is.na(d_switched_occupation), F, d_switched_occupation))
 workers <- workers %>% mutate(d_prsntly_empl_switched_occupation_1 =  ifelse((d_switched_occupation == T & d_occptn_exp_selling==T & d_presently_employed == T), T, F))
 workers <- workers %>% mutate(d_prsntly_empl_didnt_switch_1 =  ifelse((d_switched_occupation == F & d_occptn_exp_selling==T & d_presently_employed == T ), T, F))
 SET1 <- c("d_presently_employed_1","d_prsntly_empl_switched_occupation_1","d_prsntly_empl_didnt_switch_1")

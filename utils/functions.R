@@ -44,7 +44,7 @@ IO.SaveJson <- function(DF, NAME, PATH, dates=T, dayOnly=T) {
   if(dates == T) {
         
     if(dayOnly == T) {
-      write(exportJSON, paste0(PATH, NAME, format(Sys.time(),'_%Y%mm%d'), ".json"))
+      write(exportJSON, paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d'), ".json"))
     } else {
       write(exportJSON, paste0(PATH, NAME, format(Sys.time(),'_%Y%m%d_%H%M%S'), ".json"))
     }
@@ -527,3 +527,74 @@ BI.MultiGetPropCountMsMs <- function(DF, MS_PREFIXES) {
 DB.WriteToDb <- function(con, df, table_name) {
   dbWriteTable(con,table_name, df, row.names=FALSE, overwrite = TRUE)
 }
+
+
+RPRT.ReplaceNAs <- function(DF, VAR) {
+  DF <- data.frame(lapply(DF, as.character), stringsAsFactors=FALSE)
+  DF[c(VAR)][is.na(DF[c(VAR)])] <- 99
+  return(DF)
+}
+
+RPRT.SaveChartData <- function(DF, VARS, FILE) {
+  final <- UNI.GetCountsAndProportionsSS(DF, VARS)
+  final <- final %>% 
+    filter(value!=FALSE) %>% 
+    select(variable, perc_of_total) %>%
+    rename(label=variable, value=perc_of_total)
+  IO.SaveJson(final, FILE, JSON_EXPORT_PATH)
+  return(final)
+}
+
+
+RPRT.SaveDistData <- function(DF, VAR, FILE) {
+  
+  DF <- RPRT.ReplaceNAs(DF, VAR)
+  dist <- UNI.GetCountsAndProportionsSS(DF, c(VAR))
+  path <- paste0(ROOT_URL, "misc/mapping.xlsx")
+  mapping <- IO.XlsSheetToDF(excel_sheets(path)[1], path) %>% select(variable, value, label_ne, label_en)
+  dist_w_labels <- left_join(dist, mapping)
+  IO.SaveJson(dist_w_labels, FILE, JSON_EXPORT_PATH)
+  print(paste0("Sum: ", sum(dist_w_labels$total)))
+  return(dist_w_labels)
+}
+
+library(stringr)
+
+# p <- "i_covid_effect_business"
+# DF <- businesses
+# RNK_VAR <- "i_covid_effect_business_rnk1"
+# i<- 1  
+# TST_VAR <- "hooha"
+RPRT.CorrectBiggestPriorityVar <- function(DF, PREFIX, RNK_VAR) {
+  
+  p <- PREFIX
+  
+
+  names <- names(DF)[ grepl( p , names( DF ) )]
+  names <- names[ !grepl( "*rnk*" , names )]
+  names <- names[ !grepl( "*_other" , names )]
+  DF$allVals <- ""
+  
+  for(i in 1:length(names)) {
+    varname <- paste0(p, "__", i)
+    DF <- DF %>% mutate(allVals  = ifelse((!!as.symbol(varname)) == 1, paste0(allVals, i," "), allVals ))
+  }   
+  
+  DF$freq <-str_count(DF$allVals,'\\w+')
+  DF <- DF %>%  mutate(oohlala = ifelse(freq==1, (trimws(allVals)), as.character(.data[[RNK_VAR]])))
+  DF[c("freq", "allVals", RNK_VAR, "oohlala")]
+  
+
+ 
+  DF[RNK_VAR] <- DF["oohlala"]
+  
+  
+  
+  
+  DF2 <- DF[ , !names(DF) %in% c("allVals")]
+  # DF2[RNK_VAR] <- ifelse(is.na(DF2[RNK_VAR]), 11, DF2[RNK_VAR])
+  # DF2[RNK_VAR] <- as.numeric(as.character(DF2[RNK_VAR]))
+  return(DF2)
+}
+
+
