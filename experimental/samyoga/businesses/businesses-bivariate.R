@@ -1,5 +1,5 @@
-# After downloading survey data from ONA, we noticed that columns have alues stored as numeric codes. This code is responsible for mapping numeric values stored on ONA survey responses to their respective labels.
-# Inputs: Workers survey data file in XLS format and Workers survey XLSform
+# After downloading survey data from ONA, we noticed that columns have values stored as numeric codes. This code is responsible for mapping numeric values stored on ONA survey responses to their respective labels.
+# Inputs: Business survey data file in XLS format and Business survey XLSform
 
 # Libraries
 library(tidyr)

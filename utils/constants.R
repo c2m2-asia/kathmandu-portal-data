@@ -138,7 +138,6 @@ SS_VARS_BUSINESS <- c("i_econ_stop_business",
                       "o_rcvry_biggest_support",
                       "o_perm_stop_biz_future_retrn_trsm_biz",
                       "o_perm_stop_biz_start_new_job",
-                      # "m_name_business",
                       "m_biz_type",
                       "m_biz_years_in_operation"
 )
@@ -170,3 +169,5 @@ MS_VARS_BUSINESS <- c(
                       "m_biz_unn_membrshps"
 )
 
+COORDINATES_BUSINESSES <- c("_m_coodinates_latitude", 
+                            "_m_coodinates_longitude")

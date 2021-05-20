@@ -515,6 +515,56 @@ BI.MultiGetPropCountMsMs <- function(DF, MS_PREFIXES) {
   return(countsAndProportionsTable)
 }
 
+HeatMap.GetCountsAndProportionsSS <- function(DF, INPUTVARS) {
+  # Create empty table
+  proportionsTable <- data.frame(value = factor(),
+                                 perc_of_total = double(),
+                                 variable = character())
+  
+  countsTable <- data.frame(value = factor(),
+                            total = double(),
+                            variable = character())
+  
+  # Proportions and counts generator function
+  generateProportions <- function(variable_name, df, summarydf) {
+    table <- table(df[, variable_name])
+    output <- as.data.frame(round(prop.table(table), 7))
+    output$variable <- variable_name
+    colnames(output) <- c('value', 'perc_of_total', 'variable')
+    # summary(output)
+    summarydf <-  rbind(summarydf, output)
+    return(summarydf)
+  }
+  
+  
+  
+  generateCounts <- function(variable_name, df, summarydf) {
+    table <- table(df[, variable_name])
+    output <- as.data.frame(table)
+    # print(output)
+    output$variable <- variable_name
+    colnames(output) <- c('value', 'total', 'variable')
+    # summary(output)
+    summarydf <-  rbind(summarydf, output)
+    return(summarydf)
+  }
+  
+  
+  univariateStats <- ddply(DF, .(m_name_business), function(d.sub) {
+    variables <- INPUTVARS
+    for (item in variables) {
+      proportionsTable <- generateProportions(item, d.sub, proportionsTable)
+      countsTable <- generateCounts(item, d.sub, countsTable)
+    }
+    countsAndProportions <-
+      inner_join(proportionsTable, countsTable) %>% select(variable, value, total, perc_of_total)
+    return(countsAndProportions)
+  })
+  
+  univariateStats <- univariateStats[-c(1)]
+  return(univariateStats)
+  
+}
 
 
 
