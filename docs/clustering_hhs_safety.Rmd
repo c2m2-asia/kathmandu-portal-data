@@ -1,0 +1,321 @@
+---
+title: "Clustering based on HHS measures adopted"
+runningheader: "Clustering tourism businesses based on HHS Measures Adopted" # only for pdf output
+subtitle: "An implementation in hierarchical clustering technique" # only for html output
+author: "Arogya Koirala"
+date: "`r Sys.Date()`"
+output:
+  tufte::tufte_html: 
+    tufte_features: ["fonts", "background", "italics"]
+  tufte::tufte_handout:
+    fig_width: 12
+    citation_package: natbib
+    latex_engine: xelatex
+  tufte::tufte_book:
+    citation_package: natbib
+    latex_engine: xelatex
+bibliography: skeleton.bib
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+library(tufte)
+# invalidate cache when the tufte version changes
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.width=15, fig.height=6) 
+```
+
+
+
+# Why?
+In our survey, we’ve collected information around the kind of health and sanitation practices in place at different tourism businesses in and around Kathmandu. We want to use simple clustering techniques to group businesses based on their health and sanitation preparedness, and use maps to spatially represent this information.
+Since our respondents are only a small subset of tourism businesses in Kathmandu, we also want to overlay OSM data and see if any patterns emerge.
+
+
+# Setup
+
+Import necessary libraries.
+
+```{r message=FALSE, results='hide'}
+library(vegan)
+library(ggplot2)
+library(purrr)
+library(rworldmap)
+library(leaflet)
+library(cluster)
+library(UpSetR)
+# Imports
+source("~/projects/c2m2/kathmandu-survey/utils/functions.R")
+source("~/projects/c2m2/kathmandu-survey/utils/constants.R")
+```
+
+# Data import 
+In this step, we import the latest business survey dataset, select relavant columns for our analysis, and rename columns for better legibility.
+
+```{r}
+
+# Get survey data
+survey_data_path <- paste0(
+  ROOT_URL, 
+  "raw/data/business_data_20210531.xlsx"
+)
+
+businesses <- IO.XlsSheetToDF(
+  excel_sheets(survey_data_path)[1], 
+  survey_data_path
+)
+
+# Create flag variable to distinguish
+# permanently closed businesses
+businesses <- businesses %>% 
+  mutate(d_shut_down_perm = ifelse(
+    (i_econ_stop_business == 3), T, F))
+
+# Subset data to only include HHS variables
+hhs_vars <- c("X_index",
+  "d_shut_down_perm",
+  "p_hlth_hhs_measures__1",
+  "p_hlth_hhs_measures__2",
+  "p_hlth_hhs_measures__3",
+  "p_hlth_hhs_measures__4",
+  "p_hlth_hhs_measures__5",
+  "p_hlth_hhs_measures__6",
+  "p_hlth_hhs_measures__7",
+  "p_hlth_hhs_measures__8",
+  "p_hlth_hhs_measures__9",
+  "p_hlth_hhs_measures__10",
+  "m_biz_type",
+  "m_coodinates"
+) 
+
+# Rename columns
+businesses_hhs <- businesses %>% select(all_of(hhs_vars))
+colnames(businesses_hhs) <- c(
+  "id",
+  "perm_closed",
+  "sntzrs",
+  "empl_trained",
+  "thrml_scrn",
+  "soc_dist",
+  "cshless",
+  "nobufft",
+  "c19mrktg",
+  "outsrc",
+  "othr",
+  "none",
+  "type",
+  "coordinates"
+)
+
+renamed_cols <- colnames(businesses_hhs)
+
+businesses_hhs <- businesses_hhs %>% filter(perm_closed == F)
+
+# Preview
+knitr::kable(
+  businesses_hhs[1:6, 1:9], caption = 'A subset of businesses_hhs'
+)
+```
+
+# Exploratory data analysis using the UpsetR package
+
+The package `UpsetR`, which provides intersection totals for a combination of binary variables can be used to quickly scan through data.
+
+```{r, fig.fullwidth=TRUE}
+
+# Subset columns of interest
+subs <- businesses_hhs %>% select(c(colnames(businesses_hhs)[3:11]))
+
+# Function to convert all factors to numeric
+asNumeric <- function(x) as.numeric(as.character(x))
+factorsNumeric <- function(d) modifyList(
+  d, 
+  lapply(d[, sapply(d, is.factor)],asNumeric)
+)
+
+# Visualize using UpsetR 
+upset(factorsNumeric(subs), 
+      order.by="freq", 
+      main.bar.color = "#c3092b", 
+      sets.bar.color = "#c3092b", 
+      group.by = "degree"
+)
+```
+
+# Performing hierarchical clustering
+
+Link 1: Approach, https://uc-r.github.io/hc_clustering
+
+Link 2: We are going to use Jaccard distances (see, https://towardsdatascience.com/user-similarity-with-binary-data-in-python-d15940a702fc)
+
+
+
+
+```{r}
+
+# Subset only relevant columns
+measures_var <- renamed_cols[3:12]
+df <- businesses_hhs %>% 
+  select(all_of(measures_var))
+
+# Convert columns to numeric values
+indx <- sapply(df, is.factor)
+df[indx] <- lapply(df[indx], function(x) as.numeric(as.character(x)))
+
+# Compute distance matrix based on "jaccard" distance
+dist.mat<-vegdist(
+  df,
+  method="jaccard",
+  binary = T
+) 
+
+
+# methods to assess
+m <- c( "average", "single", "complete", "ward")
+names(m) <- c( "average", "single", "complete", "ward")
+
+# function to compute coefficient
+ac <- function(x) {
+  agnes(df, method = x)$ac
+}
+
+map_dbl(m, ac)
+```
+
+
+```{r, fig.fullwidth=TRUE}
+# Perform and plot clustering results
+clust.res<-hclust(dist.mat, method = "ward") #agglomerative clustering using complete linkage
+plot(clust.res, hang=-1, cex=0.8)
+```
+
+## Notes:
+
+1. We will be using k=5 to assign clusters
+
+
+# Assigning clusters and profiling
+
+Our next step is to assign cluster values to the dataset, and then generate statistics for each cluster to get a sense of cluster characteristics. Before we do that, however, lets look at percentage values for different columns for the entire population.
+
+```{r}
+totals <- df %>% summarise(
+  n = n(),
+  sntzrs=sum(as.numeric(as.character(sntzrs)))/n(),
+  empl_trained=sum(as.numeric(as.character(empl_trained)))/n(),
+  thrml_scrn=sum(as.numeric(as.character(thrml_scrn)))/n(),
+  soc_dist=sum(as.numeric(as.character(soc_dist)))/n(),
+  cshless=sum(as.numeric(as.character(cshless)))/n(),
+  nobufft=sum(as.numeric(as.character(nobufft)))/n(),
+  c19mrktg=sum(as.numeric(as.character(c19mrktg)))/n()
+)
+
+knitr::kable(totals, digits=2)
+```
+
+Now then, lets map our businesses to their respective clusters and look at how these values are distributed at the cluster level.
+
+```{r}
+
+sub_grp <- cutree(clust.res, k = 5)
+df <- cbind(df, sub_grp)
+businesses_hhs <- cbind(businesses_hhs, sub_grp)
+
+cluster_profiles <- df %>% 
+  group_by(sub_grp) %>% 
+  summarise(
+    n = n(),
+    sntzrs=sum(as.numeric(as.character(sntzrs)))/n(),
+    empl_trained=sum(as.numeric(as.character(empl_trained)))/n(),
+    thrml_scrn=sum(as.numeric(as.character(thrml_scrn)))/n(),
+    soc_dist=sum(as.numeric(as.character(soc_dist)))/n(),
+    cshless=sum(as.numeric(as.character(cshless)))/n(),
+    nobufft=sum(as.numeric(as.character(nobufft)))/n(),
+    c19mrktg=sum(as.numeric(as.character(c19mrktg)))/n()
+)
+
+knitr::kable(cluster_profiles, digits=2)
+```
+
+It also makes sense to look at the different business types allocated to each cluster.
+
+```{r, fig.fullwidth=TRUE,  fig.height=7}
+ggplot(
+  businesses_hhs, 
+  aes(x=factor(type))
+  ) + 
+  geom_bar(
+  stat="count", 
+  width=0.7, 
+  fill="#c3092b") +
+  facet_grid(sub_grp ~ .) + 
+  scale_x_discrete(
+  breaks=1:9,
+  labels=c(
+    "Hotel",
+    "Rest & B",
+    "Trav. Tour",
+    "Handicraft",
+    "Rafting",
+    "Trekking",
+    "Mountnring", 
+    "Shop", 
+    "Other"
+    )
+  ) +
+  theme_linedraw()
+```
+
+# Viewing clusters on a map
+
+```{r}
+
+businesses_hhs<- within(
+  businesses_hhs, 
+  coord<-data.frame(
+    do.call(
+      'rbind', 
+      strsplit(as.character(coordinates),
+               ' ', 
+               fixed=TRUE
+               )
+      )
+    )
+  )
+businesses_hhs$lat <-as.numeric(
+  as.character(businesses_hhs$coord[[1]])
+  )
+
+businesses_hhs$lng <- as.numeric(
+  as.character(    businesses_hhs$coord[[2]])
+  )
+
+businesses_hhs <- businesses_hhs[ ,!(colnames(businesses_hhs) == "coord")]
+
+onlyLatLng <- businesses_hhs[!is.na(businesses_hhs$lat), ]
+onlyLatLng <- businesses_hhs[!is.na(businesses_hhs$lng), ]
+
+
+
+colors <- c("#1a9641ff", "#a6d96aff", "#ffffbfff", "#fdae61ff","#d7191cff")
+factpal <- colorFactor(colors, onlyLatLng$sub_grp)
+leaflet(data = onlyLatLng, width = "100%") %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addCircleMarkers(
+    lng = ~lng, 
+    lat = ~lat, 
+    color = ~factpal(sub_grp),
+    stroke = FALSE, 
+    fillOpacity = 0.5,
+    label = ~sub_grp) %>%
+  addLegend(
+    "bottomright", 
+    pal = factpal, 
+    values = ~sub_grp,
+    title = "Cluster Assignment",
+    opacity = 1
+  )
+
+
+
+```
