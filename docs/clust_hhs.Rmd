@@ -85,6 +85,7 @@ table {
     margin-bottom: 50px;
     border: 1px solid #e5e5e5;
 }
+
 ```
 
 
@@ -119,6 +120,8 @@ In addition, the following additional attributes will all be used outside the cl
 4. **X_m_coodinates_latitude**: Latitude information for the business. This was added during the data pre-processing step.
 5. **X_m_coodinates_longitude**:   Longitude information for the business. This was added during the data pre-processing step.
 
+
+*Note: The raw data used for this analysis can be downloaded [here](https://github.com/c2m2-asia/kathmandu-survey/blob/main/raw/data/business_data_20210531_wloc.xlsx).*
 
 ## Method
 
@@ -155,7 +158,7 @@ To identify the appropriate cluster linkage method (our goal is to use a method 
 
 ## Analysis with code
 
-For the purposes of brevity and legibility, only important sections of the code has been shown in this document. The remaining ciode is hidden. To view the full code used for the analysis, you can review the raw RMarkdown file [here](link).
+For the purposes of brevity and legibility, only important sections of the code has been shown in this document. The remaining ciode is hidden. To view the full code used for the analysis, you can review the raw RMarkdown file [here](https://github.com/c2m2-asia/kathmandu-survey/blob/main/docs/clust_hhs.Rmd).
 
 
 ```{r, include=FALSE}
