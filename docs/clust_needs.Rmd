@@ -1,6 +1,7 @@
 
+
 ---
-title: "Segmenting tourism businesses based on health, hygiene and safety (HHS) measures adopted"
+title: "Segmenting tourism businesses based on immediate needs"
 runningheader: "Clustering tourism businesses based on HHS Measures Adopted" # only for pdf output
 subtitle: "An implementation using hierarchical clustering" # only for html output
 author: "Arogya Koirala for Kathmandu Living Labs"
@@ -91,7 +92,7 @@ table {
 
 
 ## Why?
-In our survey, we have  collected information around the kind of health and sanitation practices in place at different tourism businesses in and around Kathmandu. In this report, we use statistical clustering techniques to segment businesses based on their health and sanitation preparedness, and use maps to spatially represent this information. Since our respondents are only a small subset of tourism businesses in Kathmandu, we also want to overlay OSM data and see if any patterns emerge.
+Tourism businesses need [financial support](https://c2m2-asia.github.io/kathmandu/dives/2021-05-13-business-needs). However, not all of them need the same level of support. At present, government-led financial interventions usually take a blanket approach to providing assistance, announcing schemes that allocate equal amounts of funds for all businesses. However, that may lead to fund misappropriation, and worse, losses. We want to demonstrate that through data analysis techniques applied to needs and impacts data, governments can take a more measured analytical approach to fund disbursement, and significantly save money.
 
 ## Data
 Data used in this report comes from our ongoing C2M2 Tourism Businesses' Survey, which contains responses from 112 tourism business owners from different parts of Nepal. While the survey was first targeted for business owners in Kathmandu, we have also received information from businesses in the cities of Pokhara and Chitwan respectively.   
@@ -100,18 +101,15 @@ Data used in this report comes from our ongoing C2M2 Tourism Businesses' Survey,
 After directly downloading the raw dataset from our Kobo servers, the only data preprocessing step that has been carried out is the appending of latitude and longitude  information for businesses who responded to our our survey. While we did ask tourism business owners to provide geographical coordinates, the question was optional. As a result, only around 50% of businesses provided this information. For the remaining businesses,  this information was filled in by KLL's geospatial team, after thoroughly cross-referencing metadata (name, location, email, etc.) provided by businesses with existing OSM data. Presently, only three businesses don't have geospatial coordinates associated with them because the provided metadata wasn't clear or sufficient enough to pinpoint these businesses locations.
 
 ### Variables
-For the purposes of our analysis, we will be segmenting businesses based on their response to the question: "Which of the following health and sanitation measures did your business employ during the pandemic?". Respondents could choose one of many options, which have been stored in the following columns as binary (flag) variables:
+For the purposes of our analysis, we will be segmenting businesses based on their response to the question: **"Within the next six months, which of the following problems will your business face?"**. Respondents could choose one of many options, which have been stored in the following columns as binary (flag) variables:
 
-1. **sntzrs**: Placed sanitizers at prominent locations
-2. **empl_trained**: Trained our employees on HHS (health, hygiene, and sanitation)
-3. **thrml_scrn**:  Placed thermal screening and disinfection
-4. **soc_dist**: Maintained social distancing at our business premises
-5. **cshless**: Introduced/implemented cashless payments
-6. **nobufft**: Discontinued buffet services (applicable for hotels and restaurants only) 
-7. **c19mrktg**: Added COVID-19 friendly marketing messages
-8. **outsrc**: Outsourced certain services like order management, delivery, etc.
-9. **other** Other
-10. **none**: None    
+1. **pay_loans**: My business will have difficulties in paying back existing loans
+2. **get_funds**: My business will have difficulties to acquire additional loans or funds
+3. **pay_taxes**:  My business will have difficulties in paying its taxes
+4. **op_cost**: My business will have difficulties in covering its operational costs
+5. **labor**: My business will most likely face labor issues
+6. **get_custs**: My business will have difficulties in getting enough customers required for its survival
+10. **none**: None of the above    
 
 In addition, the following additional attributes will all be used outside the clustering exercise to learn more about the nature of these clusters:
 
@@ -120,7 +118,6 @@ In addition, the following additional attributes will all be used outside the cl
 3. **type**: The type of business (can be one of Hotel, Restaurant and Bar, Travel and Tour Operator, Handicraft, Rafting, Trekking, Mountaineering, Shop/Merchandise, Other) 
 4. **X_m_coodinates_latitude**: Latitude information for the business. This was added during the data pre-processing step.
 5. **X_m_coodinates_longitude**:   Longitude information for the business. This was added during the data pre-processing step.
-6. **n_employees**: The number of people employed by the business before the pandemic.
 
 
 *Note: The raw data used for this analysis can be downloaded [here](https://github.com/c2m2-asia/kathmandu-survey/blob/main/raw/data/business_data_20210531_wloc.xlsx).*
@@ -150,7 +147,7 @@ Finally, we then spatially visualize businesses based ion the cluster they belon
 For the purposes of our analysis, we have only included businesses that haven't permanently shut down. Given the analysis' goals of categorizing hotels into red, yellow, and green based on the health, hygiene, and sanitation practices they follow 
 
 ####  Jaccard distance for measuring similarity
-The classification of observations into groups requires some methods for computing the distance or the (dis)similarity between each pair of observations. The result of this computation is known as a dissimilarity or distance matrix. Since we're dealing with binary variables, we cannot use traditionally used measures of distance such as Euclidean distance, as they also consider joint absences (i.e. businesses that do not use sanitizers, or businesses that do not use thermal screening, are also considered as similar). We do not want businesses to be considered similar based on choices they haven't made. To deal with this, we've used Jaccard distance. More [here](https://towardsdatascience.com/user-similarity-with-binary-data-in-python-d15940a702fc).
+The classification of observations into groups requires some methods for computing the distance or the (dis)similarity between each pair of observations. The result of this computation is known as a dissimilarity or distance matrix. Since we're dealing with binary variables, we cannot use traditionally used measures of distance such as Euclidean distance, as they also consider joint absences (i.e. businesses that do not report the likelihood of labor issues, or businesses that do not see themselves facing funding problems, are also considered as similar). We do not want businesses to be considered similar based on choices they haven't made. To deal with this, we've used Jaccard distance. More [here](https://towardsdatascience.com/user-similarity-with-binary-data-in-python-d15940a702fc).
 
 ####  Number of clusters
 These have been selected by first visually observing and cutting horizontal lines through the *dendogram* at different positions, and then looking at profiles for different numbers of  clusters, and how data is distributed among them.
@@ -202,22 +199,18 @@ raw_data <- raw_data %>%
 # Subset data to only include HHS variables
 vars <- c("X_index",
   "d_shut_down_perm",
-  "p_hlth_hhs_measures__1",
-  "p_hlth_hhs_measures__2",
-  "p_hlth_hhs_measures__3",
-  "p_hlth_hhs_measures__4",
-  "p_hlth_hhs_measures__5",
-  "p_hlth_hhs_measures__6",
-  "p_hlth_hhs_measures__7",
-  "p_hlth_hhs_measures__8",
-  "p_hlth_hhs_measures__9",
-  "p_hlth_hhs_measures__10",
+  "o_expectd_problms_next_6_mnths__1",
+  "o_expectd_problms_next_6_mnths__2",
+  "o_expectd_problms_next_6_mnths__3",
+  "o_expectd_problms_next_6_mnths__4",
+  "o_expectd_problms_next_6_mnths__5",
+  "o_expectd_problms_next_6_mnths__6",
+  "o_expectd_problms_next_6_mnths__7",
   "m_biz_type",
   "m_coodinates", 
   "X_m_coodinates_latitude",
   "X_m_coodinates_longitude",
-  "m_name_business",
-  "b_n_emplyes_pre_covid"
+  "m_name_business"
 ) 
 
 # Rename columns
@@ -225,22 +218,18 @@ data <- raw_data %>% select(all_of(vars))
 colnames(data) <- c(
   "id",
   "perm_closed",
-  "sntzrs",
-  "empl_trained",
-  "thrml_scrn",
-  "soc_dist",
-  "cshless",
-  "nobufft",
-  "c19mrktg",
-  "outsrc",
-  "othr",
+  "pay_loans",
+  "get_funds",
+  "pay_taxes",
+  "op_cost",
+  "labor",
+  "get_custs",
   "none",
   "type",
   "coordinates",
   "X_m_coodinates_latitude",
   "X_m_coodinates_longitude",
-  "name",
-  "n_employees"
+  "name"
 )
 
 renamed_cols <- colnames(data)
@@ -262,7 +251,7 @@ The package `UpsetR`, which provides intersection totals for a combination of bi
 ```{r, fig.fullwidth=TRUE}
 
 # Subset only HHS columns
-subs <- data %>% select(c(colnames(data)[3:12]))
+subs <- data %>% select(c(colnames(data)[3:9]))
 
 # Function to convert all factors to numeric
 asNumeric <- function(x) as.numeric(as.character(x))
@@ -294,7 +283,7 @@ Let's begin by computing the distance matrix based on the "jaccard" (dis)similar
 
 ```{r}
 # Subset only relevant columns
-measures_var <- renamed_cols[3:12]
+measures_var <- renamed_cols[3:9]
 df <- data %>%
   select(all_of(measures_var))
 
@@ -339,21 +328,27 @@ plot(clust.res, hang=-1, cex=0.8)
 
 Before we begin the profiling exercise, let's look at the prevalence of different health and sanitation measures across our survey respondents. Table below shows the proportion of businesses that employ different health and sanitation measures:
 
+  "pay_loans",
+  "",
+  "",
+  "op_cost",
+  "",
+  "",
+  "none",
+
+
 ```{r}
 totals <- df %>% summarise(
-  sntzrs=round(sum(as.numeric(as.character(sntzrs)))/n()*100, 2),
-  empl_trained=round(sum(as.numeric(as.character(empl_trained)))/n()*100, 2),
-  thrml_scrn=round(sum(as.numeric(as.character(thrml_scrn)))/n()*100, 2),
-  soc_dist=round(sum(as.numeric(as.character(soc_dist)))/n()*100, 2),
-  cshless=round(sum(as.numeric(as.character(cshless)))/n()*100, 2),
-  nobufft=round(sum(as.numeric(as.character(nobufft)))/n()*100, 2),
-  c19mrktg=round(sum(as.numeric(as.character(c19mrktg)))/n()*100, 2),
-  outsrc=round(sum(as.numeric(as.character(outsrc)))/n()*100, 2),
-  othr=round(sum(as.numeric(as.character(othr)))/n()*100, 2),
+  pay_loans=round(sum(as.numeric(as.character(pay_loans)))/n()*100, 2),
+  get_funds=round(sum(as.numeric(as.character(get_funds)))/n()*100, 2),
+  pay_taxes=round(sum(as.numeric(as.character(pay_taxes)))/n()*100, 2),
+  op_cost=round(sum(as.numeric(as.character(op_cost)))/n()*100, 2),
+  labor=round(sum(as.numeric(as.character(labor)))/n()*100, 2),
+  get_custs=round(sum(as.numeric(as.character(get_custs)))/n()*100, 2),
   none=round(sum(as.numeric(as.character(none)))/n()*100, 2)
-)
+ )
 
-knitr::kable(gather(totals, hhs_measure, perc_of_total, sntzrs:none, factor_key=TRUE))
+knitr::kable(gather(totals, hhs_measure, perc_of_total, pay_loans:none, factor_key=TRUE))
 
 ```
 
@@ -361,7 +356,7 @@ knitr::kable(gather(totals, hhs_measure, perc_of_total, sntzrs:none, factor_key=
 Now then, let's go ahead and assign clusters back to our observations using *k=5*. We will also go ahead and look at how our data is distributed amongst these clusters using a simple bar chart.
 
 ```{r, fig.fullwidth=TRUE}
-sub_grp <- cutree(clust.res, k = 5)
+sub_grp <- cutree(clust.res, k = 7)
 data <- cbind(data, sub_grp)
 
 # Visualize
@@ -391,16 +386,13 @@ cluster_profiles <- data %>%
   group_by(sub_grp) %>%
   summarise(
     count = n(),
-    sntzrs=round(sum(as.numeric(as.character(sntzrs)))/n()*100, 2),
-    empl_trained=round(sum(as.numeric(as.character(empl_trained)))/n()*100, 2),
-    thrml_scrn=round(sum(as.numeric(as.character(thrml_scrn)))/n()*100, 2),
-    soc_dist=round(sum(as.numeric(as.character(soc_dist)))/n()*100, 2),
-    cshless=round(sum(as.numeric(as.character(cshless)))/n()*100, 2),
-    nobufft=round(sum(as.numeric(as.character(nobufft)))/n()*100, 2),
-    c19mrktg=round(sum(as.numeric(as.character(c19mrktg)))/n()*100, 2),
-    outsrc=round(sum(as.numeric(as.character(outsrc)))/n()*100, 2),
-    othr=round(sum(as.numeric(as.character(othr)))/n()*100, 2),
-    none=round(sum(as.numeric(as.character(none)))/n()*100, 2)
+	pay_loans=round(sum(as.numeric(as.character(pay_loans)))/n()*100, 2),
+	get_funds=round(sum(as.numeric(as.character(get_funds)))/n()*100, 2),
+	pay_taxes=round(sum(as.numeric(as.character(pay_taxes)))/n()*100, 2),
+	op_cost=round(sum(as.numeric(as.character(op_cost)))/n()*100, 2),
+	labor=round(sum(as.numeric(as.character(labor)))/n()*100, 2),
+	get_custs=round(sum(as.numeric(as.character(get_custs)))/n()*100, 2),
+	none=round(sum(as.numeric(as.character(none)))/n()*100, 2)
 )
 
 knitr::kable(cluster_profiles)
@@ -415,33 +407,7 @@ A few observations:
 4. The behaviour of businesses in **Cluster 2** is a bit unclear, while these businesses have sought to adopt more than one measure, it appears there is room to do more. Once again, reaching out to these businesses could provide an oppportunity for government and non-government stakeholders to learn about the different challenges and hurdles surrounding HHS measures adoption in tourism businesses.
 
 
-Given these observations, we can observe three distinctive patterns for health, hygiene and sanitation practices emerging from our data. There is a group of businesses that have made little to no effort in adopting HHS measures follwoing the pandemic (clusters 3, 4,5). Then there is a group of responsible bunisesses, where many have adopted more than one HHS measures in response to the pandemic. Finally there is the _in-between_ group (cluster 2). Let's go ahead and regroup our clusters based on this pattern.
-
-```{r}
-data$sub_grp <- ifelse(data$sub_grp == 4, 3, ifelse(data$sub_grp==5, 3, data$sub_grp))
-cluster_profiles <- data %>% 
-  group_by(sub_grp) %>%
-  summarise(
-    count = n(),
-    sntzrs=round(sum(as.numeric(as.character(sntzrs)))/n()*100, 2),
-    empl_trained=round(sum(as.numeric(as.character(empl_trained)))/n()*100, 2),
-    thrml_scrn=round(sum(as.numeric(as.character(thrml_scrn)))/n()*100, 2),
-    soc_dist=round(sum(as.numeric(as.character(soc_dist)))/n()*100, 2),
-    cshless=round(sum(as.numeric(as.character(cshless)))/n()*100, 2),
-    nobufft=round(sum(as.numeric(as.character(nobufft)))/n()*100, 2),
-    c19mrktg=round(sum(as.numeric(as.character(c19mrktg)))/n()*100, 2),
-    outsrc=round(sum(as.numeric(as.character(outsrc)))/n()*100, 2),
-    othr=round(sum(as.numeric(as.character(othr)))/n()*100, 2),
-    none=round(sum(as.numeric(as.character(none)))/n()*100, 2)
-)
-
-knitr::kable(cluster_profiles)
-```
-
-
 At the same time, we also want to look at the distribution of businesses by type at the cluster level, as this could help reveal potential red flags. For example, a hotel business -- where there is a relatively higher probability of person-to-person contact - falling into clusters 3, 4 or 5 would be a more serious issue than a travel and tour operator falling into these clusters. So let's go ahead a visualize this information as well.
-
-
 
 ```{r, fig.fullwidth=TRUE}
 ggplot(
@@ -477,36 +443,6 @@ ggplot(
 
 And indeed, 7 out of 25 businesses that fall in Clusters 3, 4 or 5 are hotels and restaurants. These businesses should be contacted immediately and provided with necessary assistance so that they can ensure better HHS measures for their customers.
 
-Similarly, let's also look at the distribution of businesses by number of employees at the cluster level.
-
-```{r, fig.fullwidth=TRUE}
-ggplot(
-  data,
-  aes(x=factor(n_employees))
-  ) +
-  geom_bar(
-  stat="count",
-  width=0.7,
-  fill="#c3092b") +
-  geom_text(
-    stat='count', 
-    aes(label=..count..), 
-    vjust=-1
-  ) +  
-  facet_grid(sub_grp ~ .) +
-  scale_x_discrete(
-  breaks=1:5,
-  labels=c(
-    "Less than 10",
-    "11 to 30",
-    "31 to 50",
-    "51 to 100",
-    "More than 100"
-    )
-  ) +
-  theme_linedraw()
-```
-
 ### Spatially visualizing businesses by cluster type
 
 Could HHS measure adoption be linked with where businesses are located? A map based visualization can help answer this question. 
@@ -526,7 +462,7 @@ data$lng <- as.numeric(
 onlyLatLng <- data[!is.na(data$lat), ]
 onlyLatLng <- data[!is.na(data$lng), ]
 
-colors <- c("#1b9e77ff", "#d95f02ff", "#7570b3ff")
+colors <- c("#1a9641ff", "#a6d96aff", "#ffffbfff", "#fdae61ff","#d7191cff")
 factpal <- colorFactor(colors, onlyLatLng$sub_grp)
 leaflet(data = onlyLatLng, width = "75%") %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -535,7 +471,7 @@ leaflet(data = onlyLatLng, width = "75%") %>%
     lat = ~lat,
     color = ~factpal(sub_grp),
     stroke = FALSE,
-    fillOpacity = 0.8,
+    fillOpacity = 0.5,
     label = ~name) %>%
   addLegend(
     "bottomright",
@@ -546,22 +482,8 @@ leaflet(data = onlyLatLng, width = "75%") %>%
   )
 
 ```
-
-```{r, include=FALSE}
-
-write.csv(onlyLatLng, "cluster_results_hhs.csv")
-```
 Some observations:
 
 1. Businesses outside the valley appear to be doing better w.r.t HHS measures adoption. Most of the businesses who responded from the cities of Pokhara and Chitwan fall under Clusters 1 or 2. At this point, we can't say if this is because businesses these cities adopted HHS practices later (after learning from Kathmandu), because the domain they operate in require stricter HHS practices (most are hotels and restaurants), or because adopting HHS practices was more feasible. Further analysis can help us understand this phenomenon better.
 
 2. Businesses in Thamel can learn from each other. There is a good mix of safe (cluster 1) and bare-minimum (cluster 3, 4) hotels in Thamel (zoom the map to the most densely populated region). This represent an opportunity for tourism stakeholders in Thamel to collaborate with safe businesses in training hotels with HHS measure adoption.   
-
-
-### References
-
-1. Hierarchical Clustering Analysis, [https://uc-r.github.io/hc_clustering](https://uc-r.github.io/hc_clustering)
-2. User Similarity with Binary Data in Python, [https://towardsdatascience.com/user-similarity-with-binary-data-in-python-d15940a702fc](https://towardsdatascience.com/user-similarity-with-binary-data-in-python-d15940a702fc)
-3. Lex et. al, UpSet: Visualization of Intersecting Sets, IEEE Transactions on Visualization and Computer Graphics, 2014 [https://sci.utah.edu/~vdl/papers/2014_infovis_upset.pdf](https://sci.utah.edu/~vdl/papers/2014_infovis_upset.pdf)
-
-
